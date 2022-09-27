@@ -10,7 +10,7 @@ public interface TournamentDao {
 
     List<Tournament> findAllTournaments();
 
-    Tournament getTournamentById(int tournamentId);
+    Tournament findTournamentById(int tournamentId);
 
     Tournament findByTournamentName(String tournamentName);
 

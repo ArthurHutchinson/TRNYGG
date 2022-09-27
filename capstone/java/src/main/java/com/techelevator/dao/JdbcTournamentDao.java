@@ -7,11 +7,13 @@ import com.techelevator.model.User;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Component
 public class JdbcTournamentDao implements TournamentDao{
 
     private final JdbcTemplate jdbcTemplate;
@@ -34,7 +36,7 @@ public class JdbcTournamentDao implements TournamentDao{
     }
 
     @Override
-    public Tournament getTournamentById(int tournamentId) {
+    public Tournament findTournamentById(int tournamentId) {
         String sql = "SELECT * FROM tournaments WHERE tournament_id = ?";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, tournamentId);
@@ -57,6 +59,7 @@ public class JdbcTournamentDao implements TournamentDao{
         }
     }
 
+    // No Controller Endpoint...Maybe Redundant??
     @Override
     public int findIdByTournamentName(String tournamentName) {
         if (tournamentName == null) throw new IllegalArgumentException("Tournament Name cannot be Null");
