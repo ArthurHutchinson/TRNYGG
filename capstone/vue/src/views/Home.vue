@@ -9,7 +9,7 @@
 
 <script>
 import HomeDescription from '../components/HomeDescription.vue';
-import TournamentList from '..components/TournamentList.vue';
+import TournamentList from '../components/TournamentList.vue';
 export default {
   components: { 
     HomeDescription,
