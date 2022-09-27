@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@PreAuthorize("isAuthenticated()")
+//@PreAuthorize("isAuthenticated()")
 public class TournamentController {
 
     @Autowired
@@ -34,12 +34,12 @@ public class TournamentController {
         return tournament;
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @RequestMapping(path = "/tournaments/{tournamentName}", method = RequestMethod.GET)
-    public Tournament findByTournamentName (@PathVariable String tournamentName) {
-        Tournament tournament = tournamentDao.findByTournamentName(tournamentName);
-        return tournament;
-    }
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    @RequestMapping(path = "/tournaments/{tournamentName}", method = RequestMethod.GET)
+//    public Tournament findByTournamentName (@PathVariable String tournamentName) {
+//        Tournament tournament = tournamentDao.findByTournamentName(tournamentName);
+//        return tournament;
+//    }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @RequestMapping(path = "/tournaments/{tournamentId}/players", method = RequestMethod.GET)
@@ -58,9 +58,9 @@ public class TournamentController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping (path = "/tournaments/create", method = RequestMethod.POST)
     public Tournament createTournament (@RequestBody Tournament tournament) throws TournamentNotFoundException {
-        boolean success = tournamentDao.createTournament(tournament);
-        if (success) {
-            return tournamentDao.findTournamentById(tournament.getTournamentId());
+        int newId = tournamentDao.createTournament(tournament);
+        if (newId != 0) {
+            return tournamentDao.findTournamentById(newId);
         } else {
             throw new TournamentNotFoundException();
         }
@@ -75,14 +75,4 @@ public class TournamentController {
             throw new TournamentNotFoundException();
         }
     }
-
-
-
-
-
-
-
-
-
-
 }

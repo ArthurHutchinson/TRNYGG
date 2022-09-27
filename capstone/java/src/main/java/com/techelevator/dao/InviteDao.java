@@ -15,4 +15,6 @@ public interface InviteDao {
     List<Invite> getInvitesByTournamentId (int tournamentId);
 
     boolean createInvite (Invite invite);
+
+    Invite getInviteByInviteId(int inviteId);
 }

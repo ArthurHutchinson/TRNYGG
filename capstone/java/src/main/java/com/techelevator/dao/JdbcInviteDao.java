@@ -55,6 +55,17 @@ public class JdbcInviteDao implements InviteDao{
     }
 
     @Override
+    public Invite getInviteByInviteId(int Id){
+        Invite invite = null;
+        String sql = "SELECT * FROM invites WHERE invite_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, Id);
+        if(results.next()) {
+            invite = mapRowToInvite(results);
+        }
+        return invite;
+    }
+
+    @Override
     public List<Invite> getInvitesByTournamentId(int tournamentId) {
         List<Invite> invites = new ArrayList<>();
         String sql = "SELECT * FROM invites WHERE tournament_id = ?";
