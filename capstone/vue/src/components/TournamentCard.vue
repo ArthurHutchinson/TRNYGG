@@ -24,7 +24,10 @@
 
 <script>
 export default {
-    name: 'tournament-card'
+    name: 'tournament-card',
+    props: {
+        tournament: Object,
+    }
 
 }
 </script>
