@@ -2,9 +2,9 @@
   <div class= 'card'>
       
           <h2 class='tournament-name'>
-              <router-link v-bind:to="{name: 'tournament-details', params: {id: tournament.id}}">
+              <!-- <router-link v-bind:to="{name: 'tournament-details', params: {id: tournament.id}}"> -->
                   {{tournament.name}}
-              </router-link>
+              <!-- </router-link> -->
           </h2>
           <img v-if='tournament.image' v-bind:src="tournament.image"/>
           <ul class='tournament-minor-details'>
