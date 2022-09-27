@@ -1,7 +1,11 @@
 <template>
   <div class= 'card'>
-      <router-link v-bind:to="{name: 'tournament-details', params: {id: tournament.id}}">
-          <h2 class='tournament-name'>{{tournament.name}}</h2>
+      
+          <h2 class='tournament-name'>
+              <router-link v-bind:to="{name: 'tournament-details', params: {id: tournament.id}}">
+                  {{tournament.name}}
+              </router-link>
+          </h2>
           <img v-if='tournament.image' v-bind:src="tournament.image"/>
           <ul class='tournament-minor-details'>
               <li class='host-details'>
@@ -17,8 +21,6 @@
               <p class = "tournament-is-closed-text" v-if="tournament.status == 'closed'">Not accepting sign-ups</p>
               <p class = "tournament-is-open-text" v-if="tournament.status == 'open'">Accepting sign-up</p>
           </div>
-
-      </router-link>
   </div>
 </template>
 
