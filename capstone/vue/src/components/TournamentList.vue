@@ -1,10 +1,6 @@
 <template>
   <div class ="tournament-list">
-      <div v-for="tournament in tournaments" v-bind:key="tournament.id" class ="tournament">
-          <!-- <router-link v-bind:to="{name: 'placeholder', params: {id: placeholder.placeholder}}"> -->
-          {{tournament.name}}
-          <!-- </router-link> -->
-      </div>
+      <tournament-card v-bind:tournament="tournament" v-for="tournament in tournaments" v-bind:key="tournament.id" class ="tournament">
 </template>
 
 <script>
