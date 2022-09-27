@@ -6,8 +6,12 @@
 
 <script>
 import TournamentService from '../services/TournamentService.js'
+import TournamentCard from '../components/TournamentCard.vue'
 export default {
     name: 'tournament-list',
+    components: {
+        TournamentCard
+    },
     data() {
         return {
             tournaments: []

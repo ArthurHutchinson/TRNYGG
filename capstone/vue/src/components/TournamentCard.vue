@@ -1,12 +1,11 @@
 <template>
   <div class= 'card'>
-      
           <h2 class='tournament-name'>
               <!-- <router-link v-bind:to="{name: 'tournament-details', params: {id: tournament.id}}"> -->
-                  {{tournament.name}}
+                  {{tournament.tournamentName}}
               <!-- </router-link> -->
           </h2>
-          <img v-if='tournament.image' v-bind:src="tournament.image"/>
+          <img v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl"/>
           <ul class='tournament-minor-details'>
               <li class='host-details'>
                   <!-- <router-link to host page> -->
@@ -14,12 +13,13 @@
                   <!-- </router-link> -->
               </li>
               <li class='game'> Game: {{tournament.game}}</li>
-              <li class ='start-date'>Start-Date: {{tournament.startDate}}</li>
+              <li class ='start-date'>Start-Date: {{tournament.fromDate}}</li>
           </ul>
           <div class="tournament-status-container">
               <h1 class = "tournament-status-display">{{tournament.status}}</h1>
               <p class = "tournament-is-closed-text" v-if="tournament.status == 'closed'">Not accepting sign-ups</p>
               <p class = "tournament-is-open-text" v-if="tournament.status == 'open'">Accepting sign-up</p>
+              <p class = "tournament-is-neither-open-nor-closed-something-is-wrong-text" v-if="tournament.status == null">Something is wrong</p>
           </div>
   </div>
 </template>
