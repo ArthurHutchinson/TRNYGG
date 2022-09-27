@@ -124,6 +124,8 @@ public class JdbcTournamentDao implements TournamentDao{
         tournament.setTournamentType(rs.getString("type"));
         tournament.setFromDate(rs.getDate("from_date"));
         tournament.setToDate(rs.getDate("to_date"));
+        tournament.setImgUrl(rs.getString("img_url"));
+        tournament.setGame(rs.getString("game"));
         return tournament;
     }
     private User mapRowToUser(SqlRowSet rs) {
