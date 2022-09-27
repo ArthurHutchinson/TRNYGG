@@ -17,7 +17,7 @@ CREATE TABLE tournaments(
 	from_date DATE NOT NULL,
 	to_date DATE NOT NULL,
 	game VARCHAR(50),
-	img VARCHAR(200),
+	img_url VARCHAR(200),
 
 	CONSTRAINT pk_tournament_id PRIMARY KEY (tournament_id),
 	CONSTRAINT fk_organizer_id FOREIGN KEY (organizer_id) REFERENCES users(user_id)
@@ -88,7 +88,12 @@ VALUES ('userone', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K
 ('usernineteen', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
 ('usertwenty', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER');
 
-
+INSERT INTO tournaments (organizer_id, name, num_of_participants, type, from_date, to_date, game)
+VALUES (3, 'LCS Championship', 12, 'Single', '2022-09-01', '2022-09-02', 'Golf'),
+(4, 'NBA Championship', 12, 'Single', '2022-09-30', '2022-10-01', 'Wordle'),
+(5, 'NFL Championship', 20, 'Single', '2022-10-10', '2022-10-20', 'Pool'),
+(6, 'Sack Racing XTREME', 8, 'Single', '2022-11-01', '2022-11-02', 'Baduk'),
+(7, 'Darts of Doom', 2, 'Single', '2022-09-01', '2022-11-02', 'Chess');
 
 
 COMMIT;
