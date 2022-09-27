@@ -12,6 +12,8 @@ private Date fromDate;
 private Date toDate;
 private String tournamentType;
 
+    public Tournament() {}
+
     public Tournament(int tournamentId, int organizerId, String tournamentName, int numOfParticipants, Date fromDate, Date toDate, String tournamentType) {
         this.tournamentId = tournamentId;
         this.organizerId = organizerId;
