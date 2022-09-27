@@ -58,9 +58,9 @@ public class TournamentController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping (path = "/tournaments/create", method = RequestMethod.POST)
     public Tournament createTournament (@RequestBody Tournament tournament) throws TournamentNotFoundException {
-        boolean success = tournamentDao.createTournament(tournament);
-        if (success) {
-            return tournamentDao.findTournamentById(tournament.getTournamentId());
+        int newId = tournamentDao.createTournament(tournament);
+        if (newId != 0) {
+            return tournamentDao.findTournamentById(newId);
         } else {
             throw new TournamentNotFoundException();
         }

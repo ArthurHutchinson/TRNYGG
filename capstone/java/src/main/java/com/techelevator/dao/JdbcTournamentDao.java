@@ -98,21 +98,22 @@ public class JdbcTournamentDao implements TournamentDao{
     }
 
     @Override
-    public boolean createTournament(Tournament tournament) {
-        String sql = "INSERT INTO tournaments (organizer_id, name, num_of_participants, type, from_date, to_date) VALUES (?,?,?,?,?,?)";
-        return jdbcTemplate.update
-                (sql,tournament.getOrganizerId(), tournament.getTournamentName(),
+    public int createTournament(Tournament tournament) {
+        String sql = "INSERT INTO tournaments (organizer_id, name, num_of_participants, type, from_date, to_date, game, img_url) VALUES (?,?,?,?,?,?,?,?) RETURNING tournament_id";
+        int newId = jdbcTemplate.queryForObject
+                (sql, Integer.class, tournament.getOrganizerId(), tournament.getTournamentName(),
                         tournament.getNumOfParticipants(), tournament.getTournamentType(),
-                        tournament.getFromDate(), tournament.getToDate()) == 1;
+                        tournament.getFromDate(), tournament.getToDate(), tournament.getGame(), tournament.getImgUrl());
+        return newId;
     }
 
     @Override
     public boolean updateTournament(Tournament tournament, int tournamentId) {
-        String sql = "UPDATE tournaments SET organizer_id = ?, name = ?, num_of_participants = ?, type = ?, from_date = ?, to_date = ? WHERE tournament_id = ?";
+        String sql = "UPDATE tournaments SET organizer_id = ?, name = ?, num_of_participants = ?, type = ?, from_date = ?, to_date = ?, game = ?, img_url = ? WHERE tournament_id = ?";
         return jdbcTemplate.update
                 (sql,tournament.getOrganizerId(), tournament.getTournamentName(),
                         tournament.getNumOfParticipants(), tournament.getTournamentType(),
-                        tournament.getFromDate(), tournament.getToDate(), tournamentId) == 1;
+                        tournament.getFromDate(), tournament.getToDate(), tournament.getGame(), tournament.getImgUrl(), tournamentId) == 1;
     }
 
     private Tournament mapRowToTournament(SqlRowSet rs) {

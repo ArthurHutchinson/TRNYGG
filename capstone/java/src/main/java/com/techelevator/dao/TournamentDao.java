@@ -20,7 +20,7 @@ public interface TournamentDao {
 
     List<Match> findMatchesByTournamentId(int tournamentId);
 
-    boolean createTournament(Tournament tournament);
+    int createTournament(Tournament tournament);
 
     boolean updateTournament(Tournament tournament, int tournamentId);
 }
