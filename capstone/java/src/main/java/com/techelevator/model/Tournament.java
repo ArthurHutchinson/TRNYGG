@@ -12,10 +12,11 @@ private Date fromDate;
 private Date toDate;
 private String tournamentType;
 private String imgUrl;
+private String game;
 
     public Tournament() {}
 
-    public Tournament(int tournamentId, int organizerId, String tournamentName, int numOfParticipants, Date fromDate, Date toDate, String tournamentType, String imgUrl) {
+    public Tournament(int tournamentId, int organizerId, String tournamentName, int numOfParticipants, Date fromDate, Date toDate, String tournamentType, String imgUrl, String game) {
         this.tournamentId = tournamentId;
         this.organizerId = organizerId;
         this.tournamentName = tournamentName;
@@ -24,6 +25,15 @@ private String imgUrl;
         this.toDate = toDate;
         this.tournamentType = tournamentType;
         this.imgUrl = imgUrl;
+        this.game = game;
+    }
+
+    public String getGame() {
+        return game;
+    }
+
+    public void setGame(String game) {
+        this.game = game;
     }
 
     public String getImgUrl() {
