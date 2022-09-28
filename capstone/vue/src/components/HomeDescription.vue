@@ -1,6 +1,7 @@
 <template>
     <div id="hdcontainer">
         <p>This is a test</p>
+        <b-button>THIS IS A BUTTON TEST</b-button>
     </div>
 </template>
 
@@ -14,6 +15,5 @@ export default {
     #hdcontainer {
         text-size-adjust: 100px;
         color: #FFFFFF;
-        background-color: #232328;
     }
 </style>
