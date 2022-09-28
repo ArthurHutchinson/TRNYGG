@@ -2,11 +2,11 @@
     <div>
         <div class = "tournament-detail-box">
             <h1 class = "tournament-name">{{tournament.tournamentName}}</h1>
-            <img class = "tournament-logo" v-if='tournament.imgUrl' v-bind:src="tournament.imUrl"/>
+            <img class = "tournament-logo" v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl"/>
             <h2 class = "tournament-game">{{tournament.game}}</h2>
             <p class = "time details">{{tournament.fromDate}} - {{tournament.toDate}}</p>
             <ul class = "players-list"><h3 class = "players-list-header">Players</h3>
-              <li class="players-list-item" v-bind:player="player" v-for="player in tournament.players" v-bind:key="player.id">{{player.name}}</li>
+              <li class="players-list-item" v-bind:player="player" v-for="player in tournament.players" v-bind:key="player.id">{{tournament.player.name}}</li>
             <!-- partial list hiding to be implemented later -->
             <!-- possibly include a router-link for the player id to player page -->
             </ul>
