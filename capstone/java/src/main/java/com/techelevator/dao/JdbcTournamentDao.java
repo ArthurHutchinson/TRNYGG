@@ -4,6 +4,7 @@ import com.techelevator.model.Match;
 import com.techelevator.model.Tournament;
 import com.techelevator.model.TournamentNotFoundException;
 import com.techelevator.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -21,6 +22,9 @@ public class JdbcTournamentDao implements TournamentDao{
     public JdbcTournamentDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    @Autowired
+    UserDao userDao;
 
     @Override
     public List<Tournament> findAllTournaments() {
@@ -76,7 +80,7 @@ public class JdbcTournamentDao implements TournamentDao{
     @Override
     public List<User> findUsersByTournamentId(int tournamentId) {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT user_id FROM tournament_user WHERE tournament_id = ?";
+        String sql = "SELECT * FROM users JOIN tournament_user ON users.user_id = tournament_user.user_id WHERE tournament_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql,tournamentId);
         while(results.next()) {
             User user = mapRowToUser(results);
@@ -127,6 +131,9 @@ public class JdbcTournamentDao implements TournamentDao{
         tournament.setToDate(rs.getDate("to_date"));
         tournament.setImgUrl(rs.getString("img_url"));
         tournament.setGame(rs.getString("game"));
+        User user = userDao.getUserById(tournament.getOrganizerId());
+        String organizerName = user.getUsername();
+        tournament.setOrganizerName(organizerName);
         return tournament;
     }
     private User mapRowToUser(SqlRowSet rs) {

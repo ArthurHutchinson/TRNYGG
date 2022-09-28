@@ -14,7 +14,11 @@ public interface InviteDao {
 
     List<Invite> getInvitesByTournamentId (int tournamentId);
 
-    boolean createInvite (Invite invite);
+    int createInvite (Invite invite, String string);
 
     Invite getInviteByInviteId(int inviteId);
+
+    boolean updateInvite (String status, int id);
+
+    boolean addUserToTournament (int userId, int tournamentId);
 }

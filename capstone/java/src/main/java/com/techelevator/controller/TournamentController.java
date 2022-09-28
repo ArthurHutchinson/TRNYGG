@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.TournamentDao;
+import com.techelevator.dao.UserDao;
 import com.techelevator.model.Match;
 import com.techelevator.model.Tournament;
 import com.techelevator.model.TournamentNotFoundException;
@@ -31,6 +32,7 @@ public class TournamentController {
     @RequestMapping(path = "/tournaments/{tournamentId}", method = RequestMethod.GET)
     public Tournament findTournamentById (@PathVariable int tournamentId) {
         Tournament tournament = tournamentDao.findTournamentById(tournamentId);
+
         return tournament;
     }
 
