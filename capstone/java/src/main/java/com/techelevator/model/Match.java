@@ -6,15 +6,25 @@ public class Match {
     private int homeId;
     private int awayId;
     private String winner;
+    private int round;
 
     public Match() { }
 
-    public Match(int matchId, int tournamentId, int homeId, int awayId, String winner) {
+    public Match(int matchId, int tournamentId, int homeId, int awayId, String winner, int round) {
         this.matchId = matchId;
         this.tournamentId = tournamentId;
         this.homeId = homeId;
         this.awayId = awayId;
         this.winner = winner;
+        this.round = round;
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
     }
 
     public int getMatchId() {

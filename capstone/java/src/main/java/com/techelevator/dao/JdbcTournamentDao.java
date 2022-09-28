@@ -1,9 +1,6 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Match;
-import com.techelevator.model.Tournament;
-import com.techelevator.model.TournamentNotFoundException;
-import com.techelevator.model.User;
+import com.techelevator.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -78,12 +75,12 @@ public class JdbcTournamentDao implements TournamentDao{
 
     // should this go in UserDao??
     @Override
-    public List<User> findUsersByTournamentId(int tournamentId) {
-        List<User> users = new ArrayList<>();
+    public List<UserDTO> findUsersByTournamentId(int tournamentId) {
+        List<UserDTO> users = new ArrayList<>();
         String sql = "SELECT * FROM users JOIN tournament_user ON users.user_id = tournament_user.user_id WHERE tournament_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql,tournamentId);
         while(results.next()) {
-            User user = mapRowToUser(results);
+            UserDTO user = mapRowToUserDTO(results);
             users.add(user);
         }
         return users;
@@ -143,6 +140,13 @@ public class JdbcTournamentDao implements TournamentDao{
         user.setPassword(rs.getString("password_hash"));
         user.setAuthorities(Objects.requireNonNull(rs.getString("role")));
         user.setActivated(true);
+        return user;
+    }
+
+    private UserDTO mapRowToUserDTO(SqlRowSet rs) {
+        UserDTO user = new UserDTO();
+        user.setId(rs.getInt("user_id"));
+        user.setUsername(rs.getString("username"));
         return user;
     }
 
