@@ -34,6 +34,7 @@ CREATE TABLE matches(
 	home_id int NOT NULL,
 	away_id int NOT NULL,
 	winner VARCHAR(4),
+	round int NOT NULL,
 	
 	CONSTRAINT pk_match_id PRIMARY KEY (match_id),
 	CONSTRAINT fk_home_id FOREIGN KEY (home_id) REFERENCES users(user_id),
@@ -56,14 +57,15 @@ NO MAXVALUE;
 CREATE TABLE invites(
 	invite_id int NOT NULL DEFAULT nextval('seq_invite_id'),
 	tournament_id int NOT NULL,
-	sender_id int NOT NULL,
-	receiver_id int NOT NULL,
+	organizer_id int NOT NULL,
+	player_id int NOT NULL,
 	status VARCHAR(20) NOT NULL,
+	type VARCHAR(20) NOT NULL,
 	
 	CONSTRAINT pk_invite_id PRIMARY KEY (invite_id),
 	CONSTRAINT fk_tournament_id FOREIGN KEY (tournament_id) REFERENCES tournaments(tournament_id),
-	CONSTRAINT fk_sender_id FOREIGN KEY (sender_id) REFERENCES users(user_id),
-	CONSTRAINT fk_receiver_id FOREIGN KEY (receiver_id) REFERENCES users(user_id)
+	CONSTRAINT fk_organizer_id FOREIGN KEY (organizer_id) REFERENCES users(user_id),
+	CONSTRAINT fk_player_id FOREIGN KEY (player_id) REFERENCES users(user_id)
 );
 
 INSERT INTO users (username, password_hash, role)

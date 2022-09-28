@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.InviteDao;
+import com.techelevator.dao.TournamentDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.Invite;
 import com.techelevator.model.InviteDTO;
@@ -23,6 +24,9 @@ public class InviteController {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    TournamentDao tournamentDao;
+
     @GetMapping(path="/invites")
     public List<Invite> getInvitesById(Principal principal){
         int id = userDao.findIdByUsername(principal.getName());
@@ -30,8 +34,14 @@ public class InviteController {
     }
 
     @PostMapping(path="/create/invite")
-    public Invite createInvite(@RequestBody Invite invite){
-        int id = inviteDao.createInvite(invite);
+    public Invite createInvite(@RequestBody Invite invite, Principal principal){
+        String string = "";
+        if (userDao.findByUsername(principal.getName()).getId() == invite.getOrganizerId()){
+            string = "invite";
+        }else {
+            string = "request";
+        }
+        int id = inviteDao.createInvite(invite, string);
         if (id != 0) {
             return inviteDao.getInviteByInviteId(id);
         } else {

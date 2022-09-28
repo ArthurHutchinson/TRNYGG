@@ -4,18 +4,27 @@ public class Invite {
 
     private int inviteId;
     private int tournamentId;
-    private int senderId;
-    private int receiverId;
+    private int organizerId;
+    private int playerId;
     private String status;
+    private String type;
 
     public Invite() { }
 
-    public Invite(int inviteId, int tournamentId, int senderId, int receiverId, String status) {
+    public Invite(int inviteId, int tournamentId, int organizerId, int playerId, String status) {
         this.inviteId = inviteId;
         this.tournamentId = tournamentId;
-        this.senderId = senderId;
-        this.receiverId = receiverId;
+        this.organizerId = organizerId;
+        this.playerId = playerId;
         this.status = status;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getInviteId() {
@@ -34,20 +43,20 @@ public class Invite {
         this.tournamentId = tournamentId;
     }
 
-    public int getSenderId() {
-        return senderId;
+    public int getOrganizerId() {
+        return organizerId;
     }
 
-    public void setSenderId(int senderId) {
-        this.senderId = senderId;
+    public void setOrganizerId(int organizerId) {
+        this.organizerId = organizerId;
     }
 
-    public int getReceiverId() {
-        return receiverId;
+    public int getPlayerId() {
+        return playerId;
     }
 
-    public void setReceiverId(int receiverId) {
-        this.receiverId = receiverId;
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
     }
 
     public String getStatus() {
