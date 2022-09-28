@@ -2,21 +2,19 @@
   <div id="tapp">
 
     <b-navbar id="tnav">
-      <!-- logo -->
+      
       <div id="tlogo">
         <router-link v-bind:to="{ name: 'home' }" >
           <img src="./assets/trnygg.png">
         </router-link>
       </div>
-      <!--
-        the v-if="$store.state.token" if it's ==, it's checking to see if the token is empty. Login and register will appear
-        if it's != then that means token is not empty. They're logged in. Only logout will show.
-      -->
+      
       <div id="tlinks">
         <router-link id="alogin" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
         <router-link id="aregister" v-bind:to="{ name: 'register' }" v-if="$store.state.token == ''"> Register</router-link>
         <router-link id="alogout" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
       </div>
+
     </b-navbar>
 
     <div id="tmain">
@@ -24,7 +22,21 @@
     </div>
 
     <div id="credits">
-      <img id="logocredit" src="./assets/trnygg.png">
+      <div>
+        <img id="logocredit" src="./assets/trnygg.png">
+      </div>
+      <div>
+        <h4>Website made by:</h4>
+        <p>
+          Arthur Hutchinson
+          <br>
+          Jason Rosensteel
+          <br>
+          Trey Glover
+          <br>
+          Tyler Knight
+        </p>
+      </div>
     </div>
 
   </div>
@@ -42,7 +54,6 @@
     display: grid;
     background-color: #32323A;
     color: #ffffff;
-
   }
 
   #tnav {
@@ -93,7 +104,11 @@
   }
 
   #tmain {
-  
+    /* This might break things 1/2 */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* This might break things 2/2 */
   }
 
   #credits {
@@ -104,17 +119,22 @@
     color: white;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
-
+    align-content: space-between;
+    
     /* position: fixed;
     bottom: 0;
-    width: 100%; */
+    width: 100%; */ 
   }
 
   #logocredit {
-    padding-top: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     width: 300px;
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto; */
   }
 
 </style>
