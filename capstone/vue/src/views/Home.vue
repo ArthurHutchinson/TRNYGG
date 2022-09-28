@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
     <tournament-list/>
     <p>You must be NOT authenticated to see this</p>
     <home-description/>
