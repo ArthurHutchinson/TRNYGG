@@ -17,9 +17,9 @@
           </ul>
           <div class="tournament-status-container">
               <h1 class = "tournament-status-display">{{tournament.status}}</h1>
-              <p class = "tournament-is-closed-text" v-if="tournament.status == 'closed'">Not accepting sign-ups</p>
-              <p class = "tournament-is-open-text" v-if="tournament.status == 'open'">Accepting sign-ups</p>
-              <p class = "tournament-is-neither-open-nor-closed-something-is-wrong-text" v-if="tournament.status != 'open' && tournament.status != 'closed'">Something is wrong</p>
+              <p class = "tournament-status-text" v-if="tournament.status == 'closed'">Not accepting sign-ups</p>
+              <p class = "tournament-status-text" v-if="tournament.status == 'open'">Accepting sign-ups</p>
+              <p class = "tournament-status-text" v-if="tournament.status != 'open' && tournament.status != 'closed'">Something is wrong</p>
           </div>
   </div>
 </template>
