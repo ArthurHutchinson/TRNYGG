@@ -6,6 +6,7 @@ public class Tournament {
 
 private int tournamentId;
 private int organizerId;
+private String organizerName;
 private String tournamentName;
 private int numOfParticipants;
 private Date fromDate;
@@ -16,9 +17,10 @@ private String game;
 
     public Tournament() {}
 
-    public Tournament(int tournamentId, int organizerId, String tournamentName, int numOfParticipants, Date fromDate, Date toDate, String tournamentType, String imgUrl, String game) {
+    public Tournament(int tournamentId, int organizerId, String organizerName, String tournamentName, int numOfParticipants, Date fromDate, Date toDate, String tournamentType, String imgUrl, String game) {
         this.tournamentId = tournamentId;
         this.organizerId = organizerId;
+        this.organizerName = organizerName;
         this.tournamentName = tournamentName;
         this.numOfParticipants = numOfParticipants;
         this.fromDate = fromDate;
@@ -26,6 +28,14 @@ private String game;
         this.tournamentType = tournamentType;
         this.imgUrl = imgUrl;
         this.game = game;
+    }
+
+    public String getOrganizerName() {
+        return organizerName;
+    }
+
+    public void setOrganizerName(String organizerName) {
+        this.organizerName = organizerName;
     }
 
     public String getGame() {
