@@ -1,5 +1,5 @@
 <template>
-  <div class= 'card'>
+  <div id="test" class='tcard'>
           <h2 class='tournament-name'>
               <!-- <router-link v-bind:to="{name: 'tournament-details', params: {id: tournament.id}}"> -->
                   {{tournament.tournamentName}}
@@ -35,5 +35,15 @@ export default {
 </script>
 
 <style>
-
+    .tcard {
+        color: #fff;
+        background-color: #232328;
+        border: 3px solid #825AB7;
+        border-radius: 5px;
+    }
+    
+    /* #test {
+        color: green;
+        background-color: hotpink;
+    } */
 </style>

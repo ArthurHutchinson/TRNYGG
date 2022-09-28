@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class = "tournament-detail-box">
+        <div class="tournament-detail-box">
             <h1 class = "tournament-name">{{tournament.tournamentName}}</h1>
             <img class = "tournament-logo" v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl"/>
             <h2 class = "tournament-game">{{tournament.game}}</h2>
@@ -43,5 +43,5 @@ export default {
 </script>
 
 <style>
-
+    
 </style>

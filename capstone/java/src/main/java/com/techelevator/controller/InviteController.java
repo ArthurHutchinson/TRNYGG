@@ -1,15 +1,14 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.InviteDao;
+import com.techelevator.dao.TournamentDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.Invite;
+import com.techelevator.model.InviteDTO;
 import com.techelevator.model.TournamentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -25,6 +24,9 @@ public class InviteController {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    TournamentDao tournamentDao;
+
     @GetMapping(path="/invites")
     public List<Invite> getInvitesById(Principal principal){
         int id = userDao.findIdByUsername(principal.getName());
@@ -32,11 +34,33 @@ public class InviteController {
     }
 
     @PostMapping(path="/create/invite")
-    public Invite createInvite(Invite invite){
-        boolean success = inviteDao.createInvite(invite);
-        if (success) {
-            return inviteDao.getInviteByInviteId(invite.getInviteId());
+    public Invite createInvite(@RequestBody Invite invite, Principal principal){
+        String string = "";
+        if (userDao.findByUsername(principal.getName()).getId() == invite.getOrganizerId()){
+            string = "invite";
+        }else {
+            string = "request";
+        }
+        int id = inviteDao.createInvite(invite, string);
+        if (id != 0) {
+            return inviteDao.getInviteByInviteId(id);
         } else {
+            throw new TournamentNotFoundException();
+        }
+    }
+
+    @GetMapping(path="/invites/pending")
+    public List<Invite> getPendingInvitesById(Principal principal){
+        int id = userDao.findIdByUsername(principal.getName());
+        return inviteDao.getPendingInvitesById(id);
+    }
+
+    @PutMapping(path="/invites/{id}/update")
+    public Invite updateInvite(@PathVariable int id, @RequestBody InviteDTO inviteDTO){
+        boolean success = inviteDao.updateInvite(inviteDTO.getStatus(), id);
+        if(success){
+            return inviteDao.getInviteByInviteId(id);
+        }else {
             throw new TournamentNotFoundException();
         }
     }

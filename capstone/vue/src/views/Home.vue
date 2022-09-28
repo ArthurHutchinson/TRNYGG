@@ -1,8 +1,8 @@
 <template>
-  <div class="home">
-    <tournament-list/>
+  <div id="home" class="home">
     <p>You must be NOT authenticated to see this</p>
     <home-description/>
+    <tournament-list/>
   </div>
 </template>
 
@@ -17,3 +17,9 @@ export default {
   name: "home"
 };
 </script>
+
+<style>
+  #home {
+    background-color: #32323A;
+  }
+</style>
