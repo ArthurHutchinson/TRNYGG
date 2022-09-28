@@ -79,13 +79,18 @@ public class JdbcInviteDao implements InviteDao{
     }
 
     @Override
-    public boolean createInvite(Invite invite) {
-        String sql = "INSERT INTO invites (tournament_id, sender_id, receiver_id, status) VALUES (?,?,?,?)";
-        return jdbcTemplate.update
-                (sql, invite.getTournamentId(), invite.getSenderId(),
-                        invite.getReceiverId(), invite.getStatus()) == 1;
+    public int createInvite(Invite invite) {
+        String sql = "INSERT INTO invites (tournament_id, sender_id, receiver_id, status) VALUES (?,?,?,?) RETURNING invite_id";
+        int id = jdbcTemplate.queryForObject(sql, Integer.class, invite.getTournamentId(), invite.getSenderId(),
+                invite.getReceiverId(), "pending");
+        return id;
     }
 
+    @Override
+    public boolean updateInvite(String status, int id) {
+        String sql = "UPDATE invites SET status = ? WHERE invite_id = ?";
+        return jdbcTemplate.update(sql, status, id) == 1;
+    }
 
     public Invite mapRowToInvite(SqlRowSet rs) {
         Invite invite = new Invite();

@@ -9,7 +9,7 @@ START WITH 1001
 NO MAXVALUE;
 
 CREATE TABLE tournaments(
-	tournament_id SERIAL NOT NULL,
+	tournament_id int NOT NULL DEFAULT nextval('seq_tournament_id'),
 	organizer_id int NOT NULL,
 	name VARCHAR(100) NOT NULL,
 	num_of_participants int NOT NULL,
@@ -29,7 +29,7 @@ START WITH 2001
 NO MAXVALUE;
 
 CREATE TABLE matches(
-	match_id SERIAL NOT NULL,
+	match_id int NOT NULL DEFAULT nextval ('seq_match_id'),
 	tournament_id int NOT NULL,
 	home_id int NOT NULL,
 	away_id int NOT NULL,
@@ -54,7 +54,7 @@ START WITH 10001
 NO MAXVALUE;
 
 CREATE TABLE invites(
-	invite_id SERIAL NOT NULL,
+	invite_id int NOT NULL DEFAULT nextval('seq_invite_id'),
 	tournament_id int NOT NULL,
 	sender_id int NOT NULL,
 	receiver_id int NOT NULL,
