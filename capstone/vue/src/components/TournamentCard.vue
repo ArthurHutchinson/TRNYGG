@@ -1,15 +1,15 @@
 <template>
   <div id="test" class='tcard'>
           <h2 class='tournament-name'>
-              <!-- <router-link v-bind:to="{name: 'tournament-details', params: {id: tournament.id}}"> -->
+              <router-link v-bind:to="{name: 'tournament-page', params: {id: tournament.tournamentId}}">
                   {{tournament.tournamentName}}
-              <!-- </router-link> -->
+              </router-link>
           </h2>
           <img class='tournament-icon' v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl"/>
           <ul class='tournament-minor-details'>
               <li class='host-details'>
                   <!-- <router-link to host page> -->
-                    Host: {{tournament.creator}}
+                    Host: {{tournament.organizerName}}
                   <!-- </router-link> -->
               </li>
               <li class='game'> Game: {{tournament.game}}</li>
