@@ -28,6 +28,8 @@ public class JdbcInviteDao implements InviteDao{
         return invites;
     }
 
+
+
     @Override
     public List<Invite> getInvitesById(int userId) {
         List<Invite> invites = new ArrayList<>();
@@ -90,12 +92,19 @@ public class JdbcInviteDao implements InviteDao{
     public boolean updateInvite(String status, int id) {
         String sql = "UPDATE invites SET status = ? WHERE invite_id = ?";
         boolean success = jdbcTemplate.update(sql, status, id) == 1;
+        if (success && status.equals("approved")){
+            Invite invite = getInviteByInviteId(id);
+            addUserToTournament(invite.getPlayerId(), invite.getTournamentId());
+        }
         return success;
     }
 
     @Override
     public boolean addUserToTournament(int userId, int tournamentId) {
-        return false;
+        String sql = "INSERT INTO tournament_user(user_id, tournament_id) VALUES" +
+                " (?, ?)";
+        boolean success = jdbcTemplate.update(sql, userId, tournamentId) == 1;
+        return success;
     }
 
     public Invite mapRowToInvite(SqlRowSet rs) {

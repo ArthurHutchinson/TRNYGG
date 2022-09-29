@@ -55,6 +55,16 @@ public class InviteController {
         return inviteDao.getPendingInvitesById(id);
     }
 
+    @GetMapping(path="/tournaments/{id}/invites")
+    public List<Invite> getInvitesByTournament(@PathVariable int id, Principal principal){
+        if (userDao.findByUsername(principal.getName()).getId() == tournamentDao.findTournamentById(id).getOrganizerId()){
+            return inviteDao.getInvitesByTournamentId(id);
+        }else {
+            throw new TournamentNotFoundException();
+        }
+
+    }
+
     @PutMapping(path="/invites/{id}/update")
     public Invite updateInvite(@PathVariable int id, @RequestBody InviteDTO inviteDTO){
         boolean success = inviteDao.updateInvite(inviteDTO.getStatus(), id);
