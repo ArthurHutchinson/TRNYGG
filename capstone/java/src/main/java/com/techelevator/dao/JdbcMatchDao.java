@@ -36,9 +36,9 @@ public class JdbcMatchDao implements MatchDao{
     }
 
     @Override
-    public boolean setWinner(int matchId, WinnerDTO winnerDTO) {
+    public boolean setWinner(int matchId, UserDTO UserDTO) {
         String sql = "UPDATE matches SET winner = ? WHERE match_id = ?";
-        return jdbcTemplate.update(sql, winnerDTO.getWinnerUsername(), matchId) == 1;
+        return jdbcTemplate.update(sql, UserDTO.getUsername(), matchId) == 1;
     }
 
     // To Do
