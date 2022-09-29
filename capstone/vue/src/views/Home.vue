@@ -6,7 +6,7 @@
       <div id="t-text-center">
         <div id="changeFont">
         Welcome To Your Own Personal Tournament</div><br>
-        Something something, this is all just a bunch of paragraphs, this is like not really important to know, but I'm really just typing random things. In fact this is all just random. This is reall just filler text to fill this up.<br><br>
+        Something something, this is all just a bunch of paragraphs, this is like not really important to know, but I'm really just typing random things. In fact this is all just random. This is really just filler text to fill this up.<br><br>
         Speaking of which I wanna say our team is pretty cool. Tyler Knight and Jason are pretty awesome at backend stuff. <br>
         Huge thanks to Trey for figuring out t he front-end coding stuff. You guys are gods.<br><br>
         <b-button id="t-button" v-if="$store.state.token != ''">Create Tournament</b-button>
@@ -63,7 +63,7 @@ export default {
   #banner-container {
     position: relative;
     text-align: center;
-    color: white;
+    color: rgb(255, 255, 255);
   }
 
   #t-text-center {
@@ -71,12 +71,14 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    
     text-shadow: -2px 2px 2px #000000;
+    font-size: 20px;
   }
 
   #changeFont {
     font-family: 'Chakra Petch', sans-serif;
-    font-size: 25px;
+    font-size: 35px;
     text-shadow: -2px 2px 2px #000000;
   }
 
