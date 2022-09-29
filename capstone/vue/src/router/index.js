@@ -5,7 +5,10 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import User from '../views/User.vue'
+import TestPage from '../views/TestPage.vue'
 import TournamentPage from '../views/TournamentPage.vue'
+
+// import TournamentPage from '../views/TournamentPage.vue'
 // import TournamentList from '../views/TournamentList.vue'
 
 import store from '../store/index'
@@ -32,6 +35,14 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/secret-page',
+      name: 'secret-pace',
+      component: TestPage,
       meta: {
         requiresAuth: false
       }
