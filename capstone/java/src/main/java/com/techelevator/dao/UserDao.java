@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.User;
+import com.techelevator.model.UserDTO;
 
 import java.util.List;
 
@@ -8,7 +9,13 @@ public interface UserDao {
 
     List<User> findAll();
 
+    List<UserDTO> findAllUserDTO();
+
+    UserDTO findUserDTObyId(int userId);
+
     User getUserById(int userId);
+
+    UserDTO getUserDTOById(int userId);
 
     User findByUsername(String username);
 

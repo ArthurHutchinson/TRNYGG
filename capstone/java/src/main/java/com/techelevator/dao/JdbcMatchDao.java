@@ -1,15 +1,13 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Match;
-import com.techelevator.model.MatchNotFoundException;
-import com.techelevator.model.User;
-import com.techelevator.model.WinnerDTO;
+import com.techelevator.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -45,8 +43,8 @@ public class JdbcMatchDao implements MatchDao{
 
     // To Do
     @Override
-    public List<Match> generateMatches(List<WinnerDTO> winnerList) {
-        return null;
+    public List<Match> generateMatches(List<UserDTO> winnerList) {
+    return null;
     }
 
     @Override
@@ -61,9 +59,9 @@ public class JdbcMatchDao implements MatchDao{
     }
 
     @Override
-    public List<User> findUsersByMatchId(int matchId) {
+    public List<UserDTO> findUsersByMatchId(int matchId) {
         Match match;
-        List<User> userList = new ArrayList<>();
+        List<UserDTO> userList = new ArrayList<>();
         String sql = "SELECT * FROM matches WHERE match_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, matchId);
         if (results.next()) {
@@ -71,8 +69,8 @@ public class JdbcMatchDao implements MatchDao{
         } else {
             throw new MatchNotFoundException();
         }
-        userList.add(userDao.getUserById(match.getHomeId()));
-        userList.add(userDao.getUserById(match.getAwayId()));
+        userList.add(userDao.getUserDTOById(match.getHomeId()));
+        userList.add(userDao.getUserDTOById(match.getAwayId()));
         return userList;
     }
 
@@ -109,4 +107,6 @@ public class JdbcMatchDao implements MatchDao{
         match.setWinner(rs.getString("winner"));
         return match;
     }
+
+
 }
