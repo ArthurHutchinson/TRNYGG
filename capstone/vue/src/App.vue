@@ -44,6 +44,30 @@
 
 <style>
 
+  ::-webkit-scrollbar-track {
+    background-color: #232328;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #32323A;
+    border: 1px solid #232328;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background-color: green;
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+  }
+
+
+
   html {
     height: 100%;
     background-color: #32323A;

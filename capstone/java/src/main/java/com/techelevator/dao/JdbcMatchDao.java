@@ -36,15 +36,29 @@ public class JdbcMatchDao implements MatchDao{
     }
 
     @Override
-    public boolean setWinner(int matchId, WinnerDTO winnerDTO) {
+    public boolean setWinner(int matchId, UserDTO UserDTO) {
         String sql = "UPDATE matches SET winner = ? WHERE match_id = ?";
-        return jdbcTemplate.update(sql, winnerDTO.getWinnerUsername(), matchId) == 1;
+        return jdbcTemplate.update(sql, UserDTO.getUsername(), matchId) == 1;
     }
 
     // To Do
     @Override
-    public List<Match> generateMatches(List<UserDTO> winnerList) {
-    return null;
+    public List<Match> generateMatches(List<UserDTO> winnerList, int tournamentId, int round) {
+        Collections.shuffle(winnerList);
+        String sql = "INSERT INTO matches (tournament_id, home_id, away_id, round) VALUES (?,?,?,?)";
+        if (!isPowerOfTwo(winnerList.size())) {
+            UserDTO playerOne = winnerList.remove(0);
+            jdbcTemplate.update(sql, tournamentId, playerOne.getId(), null, round);
+        }
+        if (winnerList.size() % 2 == 1) {
+            UserDTO playerOne = winnerList.remove(0);
+            jdbcTemplate.update(sql, tournamentId, playerOne.getId(), null, round);
+        }
+        for (int i = 1; i < winnerList.size(); i+=2) {
+            jdbcTemplate.update(sql, tournamentId, winnerList.get(i-1).getId(), winnerList.get(i).getId(), round);
+        }
+        return findMatchesByRoundAndTournamentId(tournamentId, round);
+
     }
 
     @Override
@@ -106,6 +120,15 @@ public class JdbcMatchDao implements MatchDao{
         match.setAwayId(rs.getInt("away_id"));
         match.setWinner(rs.getString("winner"));
         return match;
+    }
+
+    static boolean isPowerOfTwo(int n)
+    {
+        if (n == 0)
+            return false;
+        return (int)(Math.ceil((Math.log(n) / Math.log(2))))
+                == (int)(Math.floor(
+                ((Math.log(n) / Math.log(2)))));
     }
 
 

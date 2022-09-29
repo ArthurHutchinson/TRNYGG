@@ -10,9 +10,9 @@ public interface MatchDao {
 
     boolean updateMatch(Match match, int matchId);
 
-    boolean setWinner(int matchId, WinnerDTO winnerDTO);
+    boolean setWinner(int matchId, UserDTO UserDTO);
 
-    List<Match> generateMatches(List<UserDTO> winnerList);
+    List<Match> generateMatches(List<UserDTO> winnerList, int tournamentId, int round);
 
     Match findMatchById(int matchId);
 
