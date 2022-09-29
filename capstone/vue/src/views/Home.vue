@@ -1,8 +1,13 @@
 <template>
   <div id="home" class="home">
-    <p>You must be NOT authenticated to see this</p>
-    <home-description/>
-    <tournament-list/>
+    <br>
+    <b-container>
+      <b-row>
+        <b-col><tournament-list/></b-col>
+        <b-col><home-description/></b-col>
+      </b-row>
+    </b-container>
+    <br>
   </div>
 </template>
 
