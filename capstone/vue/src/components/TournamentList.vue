@@ -21,7 +21,7 @@ export default {
         loadTournaments() {
             TournamentService.getTournaments().then( (response) => {
                 this.tournaments = response.data;
-                this.$store.commit("SET_TOURNAMENTS", this.tournaments);
+                // this.$store.commit("SET_TOURNAMENTS", this.tournaments);
             });
         }
     },
