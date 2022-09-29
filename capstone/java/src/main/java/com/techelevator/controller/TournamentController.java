@@ -25,7 +25,6 @@ public class TournamentController {
         return tournaments;
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     @RequestMapping(path = "/tournaments/{tournamentId}", method = RequestMethod.GET)
     public Tournament findTournamentById (@PathVariable int tournamentId) {
         Tournament tournament = tournamentDao.findTournamentById(tournamentId);
@@ -40,14 +39,12 @@ public class TournamentController {
 //        return tournament;
 //    }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     @RequestMapping(path = "/tournaments/{tournamentId}/players", method = RequestMethod.GET)
     public List<UserDTO> findUsersByTournamentId (@PathVariable int tournamentId) {
         List<UserDTO> users = tournamentDao.findUsersByTournamentId(tournamentId);
         return users;
     }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    
     @RequestMapping(path = "/tournaments/{tournamentId}/matches", method = RequestMethod.GET)
     public List<Match> findMatchesByTournamentId (@PathVariable int tournamentId) {
         List<Match> matches = tournamentDao.findMatchesByTournamentId(tournamentId);
