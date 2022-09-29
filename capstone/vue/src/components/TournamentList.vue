@@ -1,5 +1,5 @@
 <template>
-  <div class ="tournament-list">
+  <div class="tournament-list">
       <tournament-card v-bind:tournament="tournament" v-for="tournament in tournaments" v-bind:key="tournament.id" class ="tournament" />
   </div>
 </template>
@@ -21,6 +21,7 @@ export default {
         loadTournaments() {
             TournamentService.getTournaments().then( (response) => {
                 this.tournaments = response.data;
+                this.$store.commit("SET_TOURNAMENTS", this.tournaments);
             });
         }
     },
@@ -32,4 +33,4 @@ export default {
 
 <style>
 
-</style>
+</style>gi

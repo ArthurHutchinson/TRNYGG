@@ -2,10 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.TournamentDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.Match;
-import com.techelevator.model.Tournament;
-import com.techelevator.model.TournamentNotFoundException;
-import com.techelevator.model.User;
+import com.techelevator.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,7 +25,6 @@ public class TournamentController {
         return tournaments;
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     @RequestMapping(path = "/tournaments/{tournamentId}", method = RequestMethod.GET)
     public Tournament findTournamentById (@PathVariable int tournamentId) {
         Tournament tournament = tournamentDao.findTournamentById(tournamentId);
@@ -43,14 +39,12 @@ public class TournamentController {
 //        return tournament;
 //    }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     @RequestMapping(path = "/tournaments/{tournamentId}/players", method = RequestMethod.GET)
-    public List<User> findUsersByTournamentId (@PathVariable int tournamentId) {
-        List<User> users = tournamentDao.findUsersByTournamentId(tournamentId);
+    public List<UserDTO> findUsersByTournamentId (@PathVariable int tournamentId) {
+        List<UserDTO> users = tournamentDao.findUsersByTournamentId(tournamentId);
         return users;
     }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    
     @RequestMapping(path = "/tournaments/{tournamentId}/matches", method = RequestMethod.GET)
     public List<Match> findMatchesByTournamentId (@PathVariable int tournamentId) {
         List<Match> matches = tournamentDao.findMatchesByTournamentId(tournamentId);

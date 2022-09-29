@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.techelevator.model.UserDTO;
 import com.techelevator.model.UserNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -49,6 +50,17 @@ public class JdbcUserDao implements UserDao {
 	}
 
     @Override
+    public UserDTO getUserDTOById(int userId) {
+        String sql = "SELECT * FROM users WHERE user_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        if (results.next()) {
+            return mapRowToUserDTO(results);
+        } else {
+            throw new UserNotFoundException();
+        }
+    }
+
+    @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
         String sql = "select * from users";
@@ -60,6 +72,34 @@ public class JdbcUserDao implements UserDao {
         }
 
         return users;
+    }
+
+    @Override
+    public List<UserDTO> findAllUserDTO() {
+        List<UserDTO> userDTOList = new ArrayList<>();
+        String sql = "select * from users";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while (results.next()) {
+            UserDTO user = mapRowToUserDTO(results);
+            userDTOList.add(user);
+        }
+
+        return userDTOList;
+    }
+
+    @Override
+    public UserDTO findUserDTObyId(int userId) {
+        String sql = "select * from users where user_id = ?";
+        UserDTO user;
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        if (results.next()) {
+            user = mapRowToUserDTO(results);
+        } else {
+            throw new UserNotFoundException();
+        }
+        return user;
     }
 
     @Override
@@ -90,6 +130,13 @@ public class JdbcUserDao implements UserDao {
         user.setPassword(rs.getString("password_hash"));
         user.setAuthorities(Objects.requireNonNull(rs.getString("role")));
         user.setActivated(true);
+        return user;
+    }
+
+    private UserDTO mapRowToUserDTO(SqlRowSet rs) {
+        UserDTO user = new UserDTO();
+        user.setId(rs.getInt("user_id"));
+        user.setUsername(rs.getString("username"));
         return user;
     }
 }
