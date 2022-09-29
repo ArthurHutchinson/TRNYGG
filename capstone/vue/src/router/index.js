@@ -42,7 +42,7 @@ const router = new Router({
     },
     {
       path: '/secret-page',
-      name: 'secret-pace',
+      name: 'secret-page',
       component: TestPage,
       meta: {
         requiresAuth: false
