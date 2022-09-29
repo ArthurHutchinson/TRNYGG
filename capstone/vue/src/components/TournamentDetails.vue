@@ -1,13 +1,13 @@
 <template>
     <div>
         <div class="tournament-detail-box">
-            <h1 class = "tournament-name">{{tournament[0].tournamentName}}</h1>
-            <img class = "tournament-logo" v-if='tournament[0].imgUrl' v-bind:src="tournament.imgUrl"/>
-            <h2 class = "tournament-game">{{tournament[0].game}}</h2>
-            <h4 class = "host-name">{{tournament[0].organizerName}}</h4>
-            <p class = "time details">{{tournament[0].fromDate}} - {{tournament[0].toDate}}</p>
+            <h1 class = "tournament-name">{{tournament.tournamentName}}</h1>
+            <img class = "tournament-logo" v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl"/>
+            <h2 class = "tournament-game">{{tournament.game}}</h2>
+            <h4 class = "host-name">{{tournament.organizerName}}</h4>
+            <p class = "time details">{{tournament.fromDate}} - {{tournament.toDate}}</p>
             <ul class = "players-list"><h3 class = "players-list-header">Players</h3>
-              <li class="players-list-item" v-bind:player="player" v-for="player in tournament[0].players" v-bind:key="player.id">{{tournament[0].player.name}}</li>
+              <li class="players-list-item" v-bind:player="player" v-for="player in tournament.players" v-bind:key="player.id">{{tournament.player.name}}</li>
             <!-- partial list hiding to be implemented later -->
             <!-- possibly include a router-link for the player id to player page -->
             </ul>
@@ -21,21 +21,38 @@
 </template>
 
 <script>
+    import TournamentService from '../services/TournamentService.js'
+
 export default {
-    
+
     name: 'tournament-details',
     data() {
         return {
+            id: 0,
+            tournament: {}
         };
     },
 
-    computed: {
-        tournament() {
-            return this.$store.state.tournaments.filter((tournament) => {
-                return tournament.tournamentId == this.$route.params.id
-            });
-        }
+methods: {
+    loadTournamentDetails(id) {
+        TournamentService.getTournamentDetails(id).then( (response) => {
+            this.tournament = response.data;
+        })
     }
+},
+created() {
+    this.id = this.$route.params.id;
+    this.loadTournamentDetails(this.id);
+    
+}
+
+    // computed: {
+    //     tournament() {
+    //         return this.$store.state.tournaments.filter((tournament) => {
+    //             return tournament.tournamentId == this.$route.params.id
+    //         });
+    //     }
+    // }
     
 
 }
