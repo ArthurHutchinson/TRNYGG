@@ -33,4 +33,4 @@ export default {
 
 <style>
 
-</style>
+</style>gi
