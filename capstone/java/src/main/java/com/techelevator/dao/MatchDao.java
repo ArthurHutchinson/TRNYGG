@@ -12,7 +12,7 @@ public interface MatchDao {
 
     boolean setWinner(int matchId, WinnerDTO winnerDTO);
 
-    List<Match> generateMatches(List<UserDTO> winnerList);
+    List<Match> generateMatches(List<UserDTO> winnerList, int tournamentId, int round);
 
     Match findMatchById(int matchId);
 
