@@ -1,6 +1,9 @@
 <template>
     <div>
         <div class="tournament-detail-box">
+            <router-link v-bind:to="{name: 'invite-player'}" v-bind:tournament="tournament">
+                <button>Invite Player</button>
+            </router-link>
             <h1 class = "tournament-name">{{tournament.tournamentName}}</h1>
             <img class = "tournament-logo" v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl"/>
             <h2 class = "tournament-game">{{tournament.game}}</h2>

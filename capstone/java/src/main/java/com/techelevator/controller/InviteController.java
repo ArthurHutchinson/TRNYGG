@@ -3,9 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.InviteDao;
 import com.techelevator.dao.TournamentDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.Invite;
-import com.techelevator.model.InviteDTO;
-import com.techelevator.model.TournamentNotFoundException;
+import com.techelevator.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +43,7 @@ public class InviteController {
         if (id != 0) {
             return inviteDao.getInviteByInviteId(id);
         } else {
-            throw new TournamentNotFoundException();
+            throw new InviteNotFound();
         }
     }
 
@@ -65,13 +63,33 @@ public class InviteController {
 
     }
 
+    @GetMapping(path="/users/{username}/id")
+    public int getUserIdByName(@PathVariable String username){
+        int id = userDao.findIdByUsername(username);
+        if (id != 0){
+            return id;
+        }else {
+            throw new UserNotFoundException();
+        }
+    }
+
+    @GetMapping(path="/users/{username}/getid")
+    public User getUserByName(@PathVariable String username){
+        User user = userDao.findByUsername(username);
+        if(user != null){
+            return user;
+        }else {
+            throw new UserNotFoundException();
+        }
+    }
+
     @PutMapping(path="/invites/{id}/update")
     public Invite updateInvite(@PathVariable int id, @RequestBody InviteDTO inviteDTO){
         boolean success = inviteDao.updateInvite(inviteDTO.getStatus(), id);
         if(success){
             return inviteDao.getInviteByInviteId(id);
         }else {
-            throw new TournamentNotFoundException();
+            throw new InviteNotFound();
         }
     }
 }
