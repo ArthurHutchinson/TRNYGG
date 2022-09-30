@@ -3,7 +3,7 @@
       <b-navbar-nav id="t-search-bar">
         <b-nav-form id="t-search-bar-form">
           <b-form-input size="sm" type="search" placeholder="Search" v-model="searchTerm"></b-form-input>
-          <b-button  v-bind:to="{ name: 'tournament-search-results', params: {searchTerm: searchTerm} }" id="t-search-bar-btn" size="sm" type="submit">Search</b-button>
+          <b-button id="t-search-bar-btn" size="sm" type="submit" v-bind:to="{ params: {searchTerm: searchTerm} }">Search</b-button>
         </b-nav-form>
     </b-navbar-nav>
   </div>

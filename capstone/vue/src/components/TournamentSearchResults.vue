@@ -33,15 +33,16 @@ export default {
         filteredTournaments() {
             return this.tournaments.filter( (tournament) => {
                 return(
-                    tournament.tournamentName.includes(this.searchTerm) &&
-                    tournament.organizerName.includes(this.searchTerm) &&
+                    tournament.tournamentName.includes(this.searchTerm) ||
+                    tournament.organizerName.includes(this.searchTerm) ||
                     tournament.game.includes(this.searchTerm)
                 ) 
 
-            })
+            });
+            
         }
     },
-
+    
     created() {
         this.loadTournaments();
     }

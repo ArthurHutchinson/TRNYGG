@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import FooterComp from './components/FooterComp.vue'
+import FooterComp from './components/AppFooter.vue'
 import NavBar from './components/NavBar.vue'
 export default {
   components: {
