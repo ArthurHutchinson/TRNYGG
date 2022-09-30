@@ -61,6 +61,11 @@ public class MatchController {
         return matchList;
     }
 
+    @RequestMapping(path = "matches/{id}/players", method = RequestMethod.GET)
+    public List<UserDTO> getUsersByMatchId(@PathVariable int id) {
+        return matchDao.findUsersByMatchId(id);
+    }
+
 
 
 

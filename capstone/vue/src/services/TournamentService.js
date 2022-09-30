@@ -14,4 +14,10 @@ export default {
     createTournament(tournament) {
         return axios.post('/tournaments/create', tournament);
     },
+    getMatchesByTournamentId(id) {
+        return axios.get(`/tournaments/${id}/matches`);
+    },
+    getUsersByMatchId(id) {
+        return axios.get(`matches/${id}/players`)
+    }
 }
