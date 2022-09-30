@@ -68,6 +68,11 @@ public class AuthenticationController {
         return userDTOList;
     }
 
+    @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
+    public UserDTO getUserDTOById (@PathVariable int id) {
+        return userDao.findUserDTObyId(id);
+    }
+
     /**
      * Object to return as body in JWT Authentication.
      */
