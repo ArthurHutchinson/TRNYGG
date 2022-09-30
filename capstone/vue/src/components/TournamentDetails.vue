@@ -17,7 +17,8 @@
         </div>
         <div>
             
-            <b-button v-b-modal="'invite-player'"> Invite Player </b-button>
+            <b-button v-b-modal="'invite-player'" v-if="this.$store.state.user.username == tournament.organizerName"> Invite Player </b-button>
+            <b-button v-else v-on:click="requestInvite()"> Request to Join </b-button>
             <b-modal id="invite-player"> <invite-form v-bind:tournament="tournament" /> </b-modal>
         </div>
         <div class = "bracket-box">
@@ -31,6 +32,8 @@
 <script>
     import TournamentService from '../services/TournamentService.js'
     import InviteForm from '../components/InviteForm.vue'
+    import InviteService from '../services/InviteService.js'
+    import UserService from '../services/UserService.js'
 
 export default {
 
@@ -43,6 +46,12 @@ export default {
         return {
             id: 0,
             tournament: {},
+            invite: {
+                tournamentId: "",
+                organizerId: "",
+                playerId: "",
+
+            },
             
         };
     },
@@ -52,7 +61,23 @@ methods: {
         TournamentService.getTournamentDetails(id).then( (response) => {
             this.tournament = response.data;
         })
-    }
+    },
+    requestInvite(){
+        this.invite.tournamentId = this.tournament.tournamentId
+        this.invite.organizerId = this.tournament.organizerId
+        UserService.getUserId(this.$store.state.user.username).then(response => {
+            if(response.status === 200){
+                this.invite.playerId = response.data
+                InviteService.createInvite(this.invite).then(response => {
+            if(response.status === 200){
+                this.$router.push({name: 'home'})
+            }
+        })
+            }
+        })
+        
+    },
+    
 },
 created() {
     this.id = this.$route.params.id;
@@ -66,7 +91,7 @@ created() {
     //             return tournament.tournamentId == this.$route.params.id
     //         });
     //     }
-    // }
+     //
     
 
 }
