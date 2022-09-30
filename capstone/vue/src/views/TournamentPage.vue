@@ -14,7 +14,8 @@ export default {
         TournamentBracket
     },
     
-        name: "tournament-page",
+    name: "tournament-page",
+    
 }
 </script>
 
