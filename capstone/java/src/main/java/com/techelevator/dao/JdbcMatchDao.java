@@ -22,17 +22,17 @@ public class JdbcMatchDao implements MatchDao{
 
     @Override
     public int createMatch(Match match) {
-        String sql = "INSERT INTO matches (tournament_id, home_id, away_id, round) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO matches (tournament_id, home_player, away_player, round) VALUES (?,?,?,?)";
         int newId = jdbcTemplate.queryForObject(sql, Integer.class,
-                match.getTournamentId(), match.getHomeId(), match.getAwayId());
+                match.getTournamentId(), match.getHomePlayer(), match.getAwayPlayer());
         return  newId;
     }
 
     @Override
     public boolean updateMatch(Match match, int matchId) {
-        String sql = "UPDATE matches SET tournament_id = ?, home_id = ?, away_id = ?, winner = ?, round = ?";
+        String sql = "UPDATE matches SET tournament_id = ?, home_player = ?, away_player = ?, winner = ?, round = ?";
         return jdbcTemplate.update(sql, match.getTournamentId(),
-                match.getHomeId(), match.getAwayId(), match.getWinner(), match.getRound()) == 1;
+                match.getHomePlayer(), match.getAwayPlayer(), match.getWinner(), match.getRound()) == 1;
     }
 
     @Override
@@ -43,22 +43,40 @@ public class JdbcMatchDao implements MatchDao{
 
     // To Do
     @Override
-    public List<Match> generateMatches(List<UserDTO> winnerList, int tournamentId, int round) {
+    public List<Match> generateMatches(List<UserDTO> winnerList, int tournamentId) {
         Collections.shuffle(winnerList);
-        String sql = "INSERT INTO matches (tournament_id, home_id, away_id, round) VALUES (?,?,?,?)";
+        int round = 1;
+        Match match = findLastMatchByTournamentId(tournamentId);
+        if (match != null) {
+            round = match.getRound();
+            round++;
+        }
+
+        String sql = "INSERT INTO matches (tournament_id, home_player, away_player, round) VALUES (?,?,?,?)";
         if (!isPowerOfTwo(winnerList.size())) {
             UserDTO playerOne = winnerList.remove(0);
-            jdbcTemplate.update(sql, tournamentId, playerOne.getId(), null, round);
+            jdbcTemplate.update(sql, tournamentId, playerOne.getUsername(), "none", round);
         }
         if (winnerList.size() % 2 == 1) {
             UserDTO playerOne = winnerList.remove(0);
-            jdbcTemplate.update(sql, tournamentId, playerOne.getId(), null, round);
+            jdbcTemplate.update(sql, tournamentId, playerOne.getUsername(), -1, round);
         }
         for (int i = 1; i < winnerList.size(); i+=2) {
-            jdbcTemplate.update(sql, tournamentId, winnerList.get(i-1).getId(), winnerList.get(i).getId(), round);
+            jdbcTemplate.update(sql, tournamentId, winnerList.get(i-1).getUsername(), winnerList.get(i).getUsername(), round);
         }
         return findMatchesByRoundAndTournamentId(tournamentId, round);
 
+    }
+
+    @Override
+    public Match findLastMatchByTournamentId(int tournamentId) {
+        Match match = null;
+        String sql = "SELECT * FROM matches WHERE tournament_id = ? ORDER BY match_id DESC";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,tournamentId);
+        if(results.next()) {
+            match = mapRowToMatch(results);
+        }
+        return match;
     }
 
     @Override
@@ -74,19 +92,24 @@ public class JdbcMatchDao implements MatchDao{
 
     @Override
     public List<UserDTO> findUsersByMatchId(int matchId) {
-        Match match;
-        List<UserDTO> userList = new ArrayList<>();
-        String sql = "SELECT * FROM matches WHERE match_id = ?";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, matchId);
-        if (results.next()) {
-            match = mapRowToMatch(results);
-        } else {
-            throw new MatchNotFoundException();
-        }
-        userList.add(userDao.getUserDTOById(match.getHomeId()));
-        userList.add(userDao.getUserDTOById(match.getAwayId()));
-        return userList;
+        return null;
     }
+
+//    @Override
+//    public List<UserDTO> findUsersByMatchId(int matchId) {
+//        Match match;
+//        List<UserDTO> userList = new ArrayList<>();
+//        String sql = "SELECT * FROM matches WHERE match_id = ?";
+//        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, matchId);
+//        if (results.next()) {
+//            match = mapRowToMatch(results);
+//        } else {
+//            throw new MatchNotFoundException();
+//        }
+//        userList.add(userDao.getUserDTOById(match.getHomePlayer()));
+//        userList.add(userDao.getUserDTOById(match.getAwayPlayer()));
+//        return userList;
+//    }
 
     @Override
     public List<Match> findMatchesByRoundAndTournamentId(int tournamentId, int round) {
@@ -116,8 +139,8 @@ public class JdbcMatchDao implements MatchDao{
         Match match = new Match();
         match.setMatchId(rs.getInt("match_id"));
         match.setTournamentId(rs.getInt("tournament_id"));
-        match.setHomeId(rs.getInt("home_id"));
-        match.setAwayId(rs.getInt("away_id"));
+        match.setHomePlayer(rs.getString("home_player"));
+        match.setAwayPlayer(rs.getString("away_player"));
         match.setWinner(rs.getString("winner"));
         return match;
     }

@@ -9,6 +9,7 @@
               <button type="submit" v-on:click="sendInvite()">Submit</button>
           </div>
       </form>
+      <p v-if="isPageStatusBad">Something is wrong, refresh</p>
   </div>
 </template>
 
@@ -24,6 +25,7 @@ export default {
     },
     data(){
         return {
+            isPageStatusBad: false,
             invite: {
                 tournamentId: "",
                 organizerId: "",
@@ -35,17 +37,39 @@ export default {
     },
     methods: {
         sendInvite(){
-            this.user = UserService.getUser(this.username)
             this.invite.tournamentId = this.tournament.tournamentId
-            this.invite.organizerId = this.tournamentId.organizerId
-            this.invite.playerId = this.userId
+            this.invite.organizerId = this.tournament.organizerId
+            UserService.getUserId(this.username).then(response => {
+                if (response.status === 200){
+                    this.invite.playerId = response.data
+                    this.newMethod()
+                }
+            })
+            console.log(this.invite.playerId)
+            // InviteService.createInvite(this.invite).then(response => {
+            // if (response.status === 201){
+            //     this.$router.push({name: 'home'})
+            //     }else {
+            //         this.isPageStatusBad = true;
+            //     }
+            // })
+        },
+
+        newMethod(){
             InviteService.createInvite(this.invite).then(response => {
-            if (response.status === 201){
-                this.$router.push({name: 'Home'})
+                if (response.status === 200){
+                    this.$router.push({name: 'home'})
+                }else {
+                    this.isPageStatusBad = true;
                 }
             })
         }
+        
     },
+    create(){
+        this.invite.tournamentId = this.tournament.tournamentId
+        this.invite.organizerId = this.tournament.organizerId
+    }
 
 }
 </script>

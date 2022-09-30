@@ -3,18 +3,18 @@ package com.techelevator.model;
 public class Match {
     private int matchId;
     private int tournamentId;
-    private int homeId;
-    private int awayId;
+    private String homePlayer;
+    private String awayPlayer;
     private String winner;
     private int round;
 
     public Match() { }
 
-    public Match(int matchId, int tournamentId, int homeId, int awayId, String winner, int round) {
+    public Match(int matchId, int tournamentId, String homePlayer, String awayPlayer, String winner, int round) {
         this.matchId = matchId;
         this.tournamentId = tournamentId;
-        this.homeId = homeId;
-        this.awayId = awayId;
+        this.homePlayer = homePlayer;
+        this.awayPlayer = awayPlayer;
         this.winner = winner;
         this.round = round;
     }
@@ -43,20 +43,20 @@ public class Match {
         this.tournamentId = tournamentId;
     }
 
-    public int getHomeId() {
-        return homeId;
+    public String getHomePlayer() {
+        return homePlayer;
     }
 
-    public void setHomeId(int homeId) {
-        this.homeId = homeId;
+    public void setHomePlayer(String homePlayer) {
+        this.homePlayer = homePlayer;
     }
 
-    public int getAwayId() {
-        return awayId;
+    public String getAwayPlayer() {
+        return awayPlayer;
     }
 
-    public void setAwayId(int awayId) {
-        this.awayId = awayId;
+    public void setAwayPlayer(String awayPlayer) {
+        this.awayPlayer = awayPlayer;
     }
 
     public String getWinner() {

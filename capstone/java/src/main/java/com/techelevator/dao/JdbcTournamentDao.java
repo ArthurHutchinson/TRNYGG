@@ -154,8 +154,8 @@ public class JdbcTournamentDao implements TournamentDao{
         Match match = new Match();
         match.setMatchId(rs.getInt("match_id"));
         match.setTournamentId(rs.getInt("tournament_id"));
-        match.setHomeId(rs.getInt("home_id"));
-        match.setAwayId(rs.getInt("away_id"));
+        match.setHomePlayer(rs.getString("home_player"));
+        match.setAwayPlayer(rs.getString("away_player"));
         match.setWinner(rs.getString("winner"));
         return match;
     }
