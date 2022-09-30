@@ -56,12 +56,13 @@ public class MatchController {
     }
 
     @RequestMapping(path = "tournaments/{id}/startround", method = RequestMethod.POST)
-    public List<Match> generateMatches (@RequestBody StartRoundDTO startRound, @PathVariable int id) {
-     List<Match> matchList = matchDao.generateMatches(startRound.getWinnerList(), id, startRound.getRound());
-     return matchList;
+    public List<Match> generateMatches (@RequestBody List<UserDTO> winnerList, @PathVariable int id) {
+        List<Match> matchList = matchDao.generateMatches(winnerList, id);
+        return matchList;
     }
 
 
 
 
 }
+

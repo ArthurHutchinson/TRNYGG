@@ -32,13 +32,12 @@ CREATE TABLE matches(
 	match_id int NOT NULL DEFAULT nextval ('seq_match_id'),
 	tournament_id int NOT NULL,
 	home_id int NOT NULL,
-	away_id int NOT NULL,
+	away_id int,
 	winner VARCHAR(4),
 	round int NOT NULL,
 	
 	CONSTRAINT pk_match_id PRIMARY KEY (match_id),
-	CONSTRAINT fk_home_id FOREIGN KEY (home_id) REFERENCES users(user_id),
-	CONSTRAINT fk_away_id FOREIGN KEY (away_id) REFERENCES users(user_id)
+	CONSTRAINT fk_home_id FOREIGN KEY (home_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE tournament_user(

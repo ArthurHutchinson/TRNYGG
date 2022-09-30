@@ -43,22 +43,40 @@ public class JdbcMatchDao implements MatchDao{
 
     // To Do
     @Override
-    public List<Match> generateMatches(List<UserDTO> winnerList, int tournamentId, int round) {
+    public List<Match> generateMatches(List<UserDTO> winnerList, int tournamentId) {
         Collections.shuffle(winnerList);
+        int round = 1;
+        Match match = findLastMatchByTournamentId(tournamentId);
+        if (match != null) {
+            round = match.getRound();
+            round++;
+        }
+
         String sql = "INSERT INTO matches (tournament_id, home_id, away_id, round) VALUES (?,?,?,?)";
         if (!isPowerOfTwo(winnerList.size())) {
             UserDTO playerOne = winnerList.remove(0);
-            jdbcTemplate.update(sql, tournamentId, playerOne.getId(), null, round);
+            jdbcTemplate.update(sql, tournamentId, playerOne.getId(), -1, round);
         }
         if (winnerList.size() % 2 == 1) {
             UserDTO playerOne = winnerList.remove(0);
-            jdbcTemplate.update(sql, tournamentId, playerOne.getId(), null, round);
+            jdbcTemplate.update(sql, tournamentId, playerOne.getId(), -1, round);
         }
         for (int i = 1; i < winnerList.size(); i+=2) {
             jdbcTemplate.update(sql, tournamentId, winnerList.get(i-1).getId(), winnerList.get(i).getId(), round);
         }
         return findMatchesByRoundAndTournamentId(tournamentId, round);
 
+    }
+
+    @Override
+    public Match findLastMatchByTournamentId(int tournamentId) {
+        Match match = null;
+        String sql = "SELECT * FROM matches WHERE tournament_id = ? ORDER BY match_id DESC";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,tournamentId);
+        if(results.next()) {
+            match = mapRowToMatch(results);
+        }
+        return match;
     }
 
     @Override
