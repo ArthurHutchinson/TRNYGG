@@ -8,6 +8,7 @@
 import InviteForm from '../components/InviteForm.vue'
 
 export default {
+    name: 'invite-player',
   components: { InviteForm },
 
 }

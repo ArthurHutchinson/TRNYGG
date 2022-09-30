@@ -1,6 +1,13 @@
 <template>
   <div class="tournament-list">
-      <tournament-card v-bind:tournament="tournament" v-for="tournament in tournaments" v-bind:key="tournament.id" class ="tournament" />
+      <b-navbar-nav id="t-search-bar">
+        <b-nav-form id="t-search-bar-form">
+          <b-form-input size="sm" type="search" placeholder="Search" v-model="searchTerm"></b-form-input>
+        </b-nav-form>
+    </b-navbar-nav>
+      <!-- to tournament card below, add v-if search term is blank -->
+      <tournament-card v-bind:tournament="tournament" v-for="tournament in filteredTournaments" v-bind:key="tournament.id" class ="tournament" />
+  <!-- New tournament card element v-if search term is not blank that displays filtered list-->
   </div>
 </template>
 
@@ -14,7 +21,8 @@ export default {
     },
     data() {
         return {
-            tournaments: []
+            tournaments: [],
+            searchTerm: "",
         }
     },
     methods: {
@@ -27,7 +35,17 @@ export default {
     },
     created() {
         this.loadTournaments();
+    },
+    computed: {
+        filteredTournaments() {
+            return this.tournaments.filter((tournament) => {
+                return tournament.tournamentName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+                tournament.organizerName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+                tournament.game.toLowerCase().includes(this.searchTerm.toLowerCase())
+            })
+        
     }
+}
 }
 </script>
 

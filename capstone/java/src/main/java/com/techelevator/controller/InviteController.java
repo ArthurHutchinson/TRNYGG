@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class InviteController {
     }
 
     @PostMapping(path="/create/invite")
-    public Invite createInvite(@RequestBody Invite invite, Principal principal){
+    public Invite createInvite(@Valid @RequestBody Invite invite, Principal principal){
         String string = "";
         if (userDao.findByUsername(principal.getName()).getId() == invite.getOrganizerId()){
             string = "invite";
@@ -65,9 +66,9 @@ public class InviteController {
 
     @GetMapping(path="/users/{username}/id")
     public int getUserIdByName(@PathVariable String username){
-        int id = userDao.findIdByUsername(username);
-        if (id != 0){
-            return id;
+        User user = userDao.findByUsername(username);
+        if (user.getId() != 0){
+            return user.getId();
         }else {
             throw new UserNotFoundException();
         }
