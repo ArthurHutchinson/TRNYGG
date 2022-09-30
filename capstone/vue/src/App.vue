@@ -10,9 +10,9 @@
       </div>
       
       <div id="tlinks">
-        <router-link id="alogin" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
-        <router-link id="aregister" v-bind:to="{ name: 'register' }" v-if="$store.state.token == ''"> Register</router-link>
-        <router-link id="alogout" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+        <b-button id="alogin" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</b-button>
+        <b-button id="aregister" v-bind:to="{ name: 'register' }" v-if="$store.state.token == ''"> Register</b-button>
+        <b-button id="alogout" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</b-button>
       </div>
 
     </b-navbar>
@@ -28,13 +28,11 @@
       <div>
         <h4>Website made by:</h4>
         <p>
-          Arthur Hutchinson
-          <br>
+          Arthur Hutchinson | 
           Jason Rosensteel
           <br>
-          Trey Glover
-          <br>
-          Tyler Knight
+          Trey Glover |
+          Tyler Knightly
         </p>
       </div>
     </div>
@@ -44,6 +42,8 @@
 
 <style>
 
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500&display=swap');
+
   ::-webkit-scrollbar-track {
     background-color: #232328;
   }
@@ -51,10 +51,6 @@
   ::-webkit-scrollbar-thumb {
     background-color: #32323A;
     border: 1px solid #232328;
-  }
-
-  ::-webkit-scrollbar-corner {
-    background-color: green;
   }
 
   ::-webkit-scrollbar-button {
@@ -83,7 +79,6 @@
   #tnav {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
 
     border-bottom: 3px solid #825AB7; 
 
@@ -104,27 +99,47 @@
   }
 
   #tlinks #alogin {
-    color: #825AB7;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 30px;
-    text-shadow: -1.5px 1.5px 2px black;
+    background-color: #825AB7;
+    border: none;
+
+    position: relative;
+    right: 10px;
+
+    font-family: 'Chakra Petch', sans-serif;
+
+  }
+
+  #tlinks #alogin:hover {
+    background-color: #614388;
   }
 
   #tlinks #aregister {
-    color: #FC7900;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 30px;
-    text-shadow: -1.5px 1.5px 2px black;
+    background-color: #FC7900;
+    border: none;
+
+    position: relative;
+    right: 5px;
+
+    font-family: 'Chakra Petch', sans-serif;
+
+  }
+
+  #tlinks #aregister:hover {
+    background-color: #c45f00;
   }
 
   #tlinks #alogout {
-    color: #FC7900;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 30px;
-    text-shadow: -1.5px 1.5px 2px black;
+    background-color: #FC7900;
+    border: none;
+
+    position: relative;
+    right: 5px;
+
+    font-family: 'Chakra Petch', sans-serif;
+  }
+
+  #tlinks #alogout:hover {
+    background-color: #c45f00;
   }
 
   #tmain {

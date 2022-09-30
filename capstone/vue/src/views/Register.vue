@@ -1,11 +1,17 @@
 <template>
+
   <div id="register" class="text-center">
+
     <form class="form-register" @submit.prevent="register">
-      <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
-      <div class="alert alert-danger" role="alert" v-if="registrationErrors">
+
+      <h1 id="t-cr-acct-h" class="h3 mb-3 font-weight-normal">Create Account</h1>
+
+      <div id="t-alert" class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
+
       <label for="username" class="sr-only">Username</label>
+
       <input
         type="text"
         id="username"
@@ -15,7 +21,9 @@
         required
         autofocus
       />
+
       <label for="password" class="sr-only">Password</label>
+
       <input
         type="password"
         id="password"
@@ -24,6 +32,7 @@
         v-model="user.password"
         required
       />
+
       <input
         type="password"
         id="confirmPassword"
@@ -32,12 +41,18 @@
         v-model="user.confirmPassword"
         required
       />
-      <router-link :to="{ name: 'login' }">Have an account?</router-link>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
+
+      <b-button id="t-crt-btn" type="submit">
         Create Account
-      </button>
+      </b-button>
+
+      <br>
+      <router-link id="t-q-acct-link" :to="{ name: 'login' }">Have an account?</router-link>
+
     </form>
+
   </div>
+
 </template>
 
 <script>
@@ -90,4 +105,45 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+  #confirmPassword {
+    text-align: center;
+
+    margin: 0 auto;
+    width: 500px;
+  }
+
+  #t-crt-btn {
+    position: relative;
+    top: 5px;
+    
+    background-color: #FC7900;
+    border: none;
+    
+    font-family: 'Chakra Petch', sans-serif;
+  }
+
+  #t-crt-btn:hover {
+    background-color: #c45f00;
+  }
+
+  #t-q-acct-link {
+    position: relative;
+    top: 5px;
+    color:#FC7900;
+  }
+
+  #t-q-acct-link:hover {
+    color: #c45f00;
+  }
+
+  #t-cr-acct-h {
+    font-family: 'Chakra Petch', sans-serif;
+    color: #FC7900;
+    text-shadow: 2px 2px 2px black;
+  }
+
+  
+
+
+</style>

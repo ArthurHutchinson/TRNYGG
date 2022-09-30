@@ -7,7 +7,9 @@ import Register from '../views/Register.vue'
 import User from '../views/User.vue'
 import TestPage from '../views/TestPage.vue'
 import TournamentPage from '../views/TournamentPage.vue'
+import InvitePlayer from '../views/InvitePlayer.vue'
 import CreateTournament from '../views/CreateTournament.vue'
+
 
 // import TournamentPage from '../views/TournamentPage.vue'
 // import TournamentList from '../views/TournamentList.vue'
@@ -41,8 +43,16 @@ const router = new Router({
       }
     },
     {
+      path:'/invite-player',
+      name:'invite-player',
+      component: InvitePlayer,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
       path: '/secret-page',
-      name: 'secret-pace',
+      name: 'secret-page',
       component: TestPage,
       meta: {
         requiresAuth: false

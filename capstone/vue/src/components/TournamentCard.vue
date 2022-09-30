@@ -41,6 +41,11 @@ export default {
         border: 3px solid #825AB7;
         border-radius: 5px;
     }
+
+    .tournament-icon {
+        width: 200px;
+        height: 50%;
+    }
     
     /* #test {
         color: green;
