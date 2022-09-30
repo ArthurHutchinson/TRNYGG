@@ -1,8 +1,21 @@
 <template>
-    <div>
-        <div id="credits">
-            <img id="logocredit" src="../assets/trnygg.png">
-        </div>
+    <div id="credits">
+
+      <div>
+        <img id="logocredit" src="../assets/trnygg.png">
+      </div>
+
+      <div>
+        <h4>Website made by:</h4>
+        <p>
+          Arthur Hutchinson | 
+          Jason Rosensteel
+          <br>
+          Trey Glover |
+          Tyler Knightly
+        </p>
+      </div>
+
     </div>
 </template>
 
@@ -13,20 +26,21 @@ export default {
 </script>
 
 <style>
-    /* #credits {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
+    #credits {
         background-color: #232328;
         border-top: 3px solid #825AB7;
         text-align: center;
         color: white;
-        justify-content: space-between;
-        align-items: flex-end;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: space-between;
     }
 
     #logocredit {
-        padding-top: 3px;
+        padding-top: 5px;
+        padding-bottom: 5px;
         width: 300px;
-    } */
+    }
 </style>

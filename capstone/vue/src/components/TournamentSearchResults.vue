@@ -1,7 +1,7 @@
 <template>
     <div>
         
-        <tournament-card v-bind:tournament="tournament" v-for="tournament in tournaments" v-bind:key="tournament.id" class ="tournament" />
+        <tournament-card v-bind:tournament="tournament" v-for="tournament in filteredTournaments" v-bind:key="tournament.id" class ="tournament" />
 
     </div>
 </template>
@@ -23,25 +23,23 @@ export default {
     },
     methods: {
         loadTournaments() {
-            let unfilteredTournaments = [];
-
             TournamentService.getTournaments().then( (response) => {
-                unfilteredTournaments = response.data;
+                this.tournaments = response.data;
             });
-
-            this.tournaments += unfilteredTournaments.filter( (tournament) => {
-                tournament.tournamentName.toLowerCase().includes(this.searchTerm.toLowerCase());
-            });
-
-            this.tournaments += unfilteredTournaments.filter( (tournament) => {
-                tournament.organizerName.toLowerCase().includes(this.searchTerm.toLowerCase());
-            });
-
-            this.tournaments += unfilteredTournaments.filter( (tournament) => {
-                tournament.game.toLowerCase().includes(this.searchTerm.toLowerCase());
-            });
-
         },
+    },
+
+    computed: {
+        filteredTournaments() {
+            return this.tournaments.filter( (tournament) => {
+                return(
+                    tournament.tournamentName.includes(this.searchTerm) &&
+                    tournament.organizerName.includes(this.searchTerm) &&
+                    tournament.game.includes(this.searchTerm)
+                ) 
+
+            })
+        }
     },
 
     created() {
