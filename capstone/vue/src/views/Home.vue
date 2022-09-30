@@ -2,7 +2,7 @@
 
   <div id="home" class="home">
     <div id="banner-container">
-      <img id="csgoimage" src="../assets/bannercsgo2.png">
+      <img id="csgoimage" src="../assets/bannercsgo3.png">
       <div id="t-banner-text">
         
         <div id="t-banner-header">
@@ -79,7 +79,7 @@ export default {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -80%);
+    transform: translate(-50%, -93%);
     
     text-shadow: -2px 2px 2px #000000;
     font-size: 1.3vw;

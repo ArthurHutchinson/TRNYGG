@@ -9,6 +9,7 @@ import TestPage from '../views/TestPage.vue'
 import TournamentPage from '../views/TournamentPage.vue'
 import InvitePlayer from '../views/InvitePlayer.vue'
 import CreateTournament from '../views/CreateTournament.vue'
+import TSearchResult from '../views/TSearchResults.vue'
 
 
 // import TournamentPage from '../views/TournamentPage.vue'
@@ -105,7 +106,15 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    {
+      path: "/search",
+      name: "tournament-search-results",
+      component: TSearchResult,
+      meta: {
+        requiresAuth: false
+      }
+    },
     // {
     //   path: "/tournamentList",
     //   name: "tournament-list",

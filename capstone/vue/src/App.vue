@@ -2,18 +2,28 @@
   <div id="tapp">
 
     <b-navbar id="tnav">
-      
-      <div id="tlogo">
-        <router-link v-bind:to="{ name: 'home' }" >
-          <img src="./assets/trnygg.png">
-        </router-link>
-      </div>
-      
+
+      <div id="t-logo-search-bar">
+
+       <b-navbar-nav>
+        <div id="tlogo">
+          <router-link v-bind:to="{ name: 'home' }" >
+            <img src="./assets/trnygg.png">
+          </router-link>
+        </div>
+       </b-navbar-nav>
+
+    <nav-search-bar/>
+
+    </div>
+    
+    <b-navbar-nav>
       <div id="tlinks">
         <b-button id="alogin" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</b-button>
         <b-button id="aregister" v-bind:to="{ name: 'register' }" v-if="$store.state.token == ''"> Register</b-button>
         <b-button id="alogout" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</b-button>
       </div>
+    </b-navbar-nav>
 
     </b-navbar>
 
@@ -34,11 +44,20 @@
           Trey Glover |
           Tyler Knightly
         </p>
+        
       </div>
     </div>
 
   </div>
 </template>
+
+<script>
+import NavSearchBar from "./components/NavSearchBar.vue"
+
+export default {
+  components: { NavSearchBar },
+}
+</script>
 
 <style>
 
@@ -89,6 +108,10 @@
     width: 100%; */
   }
 
+  #t-logo-search-bar {
+    display: flex;
+  }
+
   #tlogo img {
     width: 250px;
   }
@@ -102,11 +125,10 @@
     background-color: #825AB7;
     border: none;
 
-    position: relative;
-    right: 10px;
-
     font-family: 'Chakra Petch', sans-serif;
 
+    position: relative;
+    right: 10px;
   }
 
   #tlinks #alogin:hover {
@@ -174,6 +196,21 @@
     /* display: block;
     margin-left: auto;
     margin-right: auto; */
+  }
+
+  #t-search-bar-form {
+    display: flex;
+    
+    position: relative;
+    top: 2px;
+    left: 10px;
+  }
+
+  #t-search-bar-btn {
+    background-color: #825AB7;
+    border: none;
+
+    font-family: 'Chakra Petch', sans-serif;
   }
 
 </style>
