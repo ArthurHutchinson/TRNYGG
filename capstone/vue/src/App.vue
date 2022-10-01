@@ -48,14 +48,13 @@ export default {
 
 /* Main HTML */
   html {
-    height: 100%;
+  
     background-color: #32323A;
     color: #fff;
   }
 
 /* Entire of this View */
   #tapp {
-    display: grid;
     background-color: #32323A;
     color: #ffffff;
   }

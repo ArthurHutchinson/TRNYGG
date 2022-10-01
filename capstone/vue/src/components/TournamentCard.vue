@@ -1,5 +1,5 @@
 <template>
-  <div id="test" class='tcard'>
+  <div class='tcard'>
           <h2 class='tournament-name'>
               <router-link v-bind:to="{name: 'tournament-page', params: {id: tournament.tournamentId}}">
                   {{tournament.tournamentName}}
