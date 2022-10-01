@@ -115,6 +115,7 @@ export default {
 #start-round{
   width: 50%;
   height: 50px;
+  margin-top: 20px;
   margin-left: 25%;
   margin-bottom: 50px;
   background-color: #825AB7;

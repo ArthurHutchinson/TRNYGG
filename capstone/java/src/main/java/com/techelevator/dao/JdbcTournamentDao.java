@@ -26,7 +26,7 @@ public class JdbcTournamentDao implements TournamentDao{
     @Override
     public List<Tournament> findAllTournaments() {
         List<Tournament> tournaments = new ArrayList<>();
-        String sql = "SELECT * FROM tournaments";
+        String sql = "SELECT * FROM tournaments ORDER BY name";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {

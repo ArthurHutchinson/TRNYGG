@@ -19,5 +19,9 @@ export default {
     },
     getUsersByMatchId(id) {
         return axios.get(`matches/${id}/players`)
+    },
+    getPlayersByTournamentId(id) {
+        return axios.get(`/tournaments/${id}/players`)
     }
+
 }
