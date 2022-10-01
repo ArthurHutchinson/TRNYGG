@@ -33,9 +33,9 @@ public class JdbcInviteDao implements InviteDao{
     @Override
     public List<Invite> getInvitesById(int userId) {
         List<Invite> invites = new ArrayList<>();
-        String sql = "SELECT * FROM invites WHERE sender_id = ? OR receiver_id = ?";
+        String sql = "SELECT * FROM invites WHERE player_id = ?";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, userId);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         while (results.next()) {
             Invite invite = mapRowToInvite(results);
             invites.add(invite);
@@ -46,9 +46,9 @@ public class JdbcInviteDao implements InviteDao{
     @Override
     public List<Invite> getPendingInvitesById(int userId) {
         List<Invite> invites = new ArrayList<>();
-        String sql = "SELECT * FROM invites WHERE sender_id = ? OR receiver_id = ? AND status = pending";
+        String sql = "SELECT * FROM invites WHERE player_id = ? AND status = pending";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, userId);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         while (results.next()) {
             Invite invite = mapRowToInvite(results);
             invites.add(invite);
