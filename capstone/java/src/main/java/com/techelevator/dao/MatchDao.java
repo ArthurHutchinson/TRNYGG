@@ -23,4 +23,7 @@ public interface MatchDao {
     List<Match> findMatchesByUserId (int userId);
 
     public Match findLastMatchByTournamentId(int tournamentId);
+
+    public Bracket generateBracket(int tournamentId, List<UserDTO> winnerList);
+
 }

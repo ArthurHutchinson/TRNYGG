@@ -17,6 +17,8 @@ public interface UserDao {
 
     UserDTO getUserDTOById(int userId);
 
+    public UserDTO findUserDTOByUsername(String username);
+
     User findByUsername(String username);
 
     int findIdByUsername(String username);
