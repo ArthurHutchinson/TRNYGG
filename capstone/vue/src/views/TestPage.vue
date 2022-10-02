@@ -8,6 +8,8 @@
         <tournament-bracket/>
 
         <br>
+
+        
     </div>
 </template>
 

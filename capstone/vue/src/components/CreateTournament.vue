@@ -1,6 +1,6 @@
 <template>
   <div id="t-create-t-page">
-      
+
       <h1 id="t-crt-trn-h" class="t-center-item">Create Tournament</h1>
   
       <b-form class = "tournament-form" v-on:submit.prevent>
@@ -25,7 +25,7 @@
         <b-input type="text" placeholder="Add a Link Here" v-model="tournament.imgUrl" />
 
         <div class="t-center-item">
-            <b-button id="t-btn-crt-trn" type="submit" v-on:click="saveTournament()">Create Tournament</b-button>
+            <b-button id="t-save-trn-btn" type="submit" v-on:click="saveTournament()">Create Tournament</b-button>
         </div>
 
     </b-form>
@@ -100,7 +100,7 @@ export default {
         top: 5px;
     }
 
-    #t-btn-crt-trn {
+    #t-save-trn-btn {
 
         position: relative;
         top: 5px;
