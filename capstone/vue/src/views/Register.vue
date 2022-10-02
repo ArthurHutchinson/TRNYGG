@@ -139,7 +139,7 @@ export default {
 
   #t-cr-acct-h {
     font-family: 'Chakra Petch', sans-serif;
-    color: #FC7900;
+    color: #a875eb;
     text-shadow: 2px 2px 2px black;
   }
 
