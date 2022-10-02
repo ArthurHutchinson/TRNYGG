@@ -101,6 +101,19 @@ public class JdbcUserDao implements UserDao {
         }
         return user;
     }
+    @Override
+    public UserDTO findUserDTOByUsername(String username) {
+        String sql = "select * from users where username = ?";
+        UserDTO user;
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+        if (results.next()) {
+            user = mapRowToUserDTO(results);
+        } else {
+            throw new UserNotFoundException();
+        }
+        return user;
+    }
 
     @Override
     public User findByUsername(String username) {

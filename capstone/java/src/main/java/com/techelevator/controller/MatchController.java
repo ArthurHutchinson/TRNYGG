@@ -2,10 +2,7 @@ package com.techelevator.controller;
 
 
 import com.techelevator.dao.MatchDao;
-import com.techelevator.model.Match;
-import com.techelevator.model.MatchNotFoundException;
-import com.techelevator.model.StartRoundDTO;
-import com.techelevator.model.UserDTO;
+import com.techelevator.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -59,6 +56,10 @@ public class MatchController {
     public List<Match> generateMatches (@RequestBody List<UserDTO> winnerList, @PathVariable int id) {
         List<Match> matchList = matchDao.generateMatches(winnerList, id);
         return matchList;
+    }
+    @RequestMapping(path = "tournaments/{id}/bracket", method = RequestMethod.POST)
+    public Bracket generateBracket (@PathVariable int id, @RequestBody List<UserDTO> winnerList) {
+        return matchDao.generateBracket(id, winnerList);
     }
 
     @RequestMapping(path = "matches/{id}/players", method = RequestMethod.GET)

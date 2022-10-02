@@ -19,8 +19,8 @@
       <div id="players-and-img">
       <div id="player-list">
         <ul class="players-list">
-          <h3 class="players-list-header">Players:</h3>
-          <li class="players-list-item" v-for="player in players" v-bind:key="player.id">{{ player.username }}</li>
+          <li class="players-list-header">Players:</li>
+          <li class="players-list-item" v-for="player in players" v-bind:key="player.id">{{ player.username }},</li>
         </ul>
     <div id="button">
       <b-button v-b-modal="'invite-player'" v-if="this.$store.state.user.username == tournament.organizerName">Invite Player</b-button>
@@ -112,16 +112,47 @@ export default {
   font-weight: 100;
   margin-top: -5px;
 }
-#player-list {
+@media screen and (max-width: 1099px) {
+  #player-list > ul{
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
+      height: 200px;
+  }
+  #player-list {
+    display: flex;
+    border: 3px solid #825AB7;
+    border-radius: 20px;
+    width: 85%;
+    height: 40vh;
+    margin-left: 7.5%;
+    flex-direction: column;
+}
+}
+@media screen and (min-width: 1100px) {
+  #player-list > ul{
+      columns: 4;
+      -webkit-columns: 4;
+      -moz-columns: 4;
+      height: 200px;
+  }
+  #player-list {
     display: flex;
     border: 3px solid #825AB7;
     border-radius: 20px;
     width: 53%;
     height: 25vh;
     margin-left: 12.5%;
-
+    flex-direction: column;
 }
-#player-list > ul > h3{
+}
+#player-list > ul > li{
+  font-size: xx-large;
+  list-style: none;
+  justify-content: space-evenly ;
+  
+}
+.players-list-header{
     font-weight: 100;
     font-size: x-large;
     justify-content: start;
@@ -139,8 +170,12 @@ export default {
 #player-list > #button{
     font-weight: 100;
     font-size: x-large;
-    align-self: flex-end;
-    margin-left: 33%;
+    align-self: center;
+    justify-content: flex-end;
+    /* margin-left: 33%; */
     margin-bottom: 10px;  
+}
+.players-list-item {
+  list-style: none;
 }
 </style>

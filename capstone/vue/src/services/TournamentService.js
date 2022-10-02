@@ -14,8 +14,8 @@ export default {
     createTournament(tournament) {
         return axios.post('/tournaments/create', tournament);
     },
-    getMatchesByTournamentId(id) {
-        return axios.get(`/tournaments/${id}/matches`);
+    getBracketByTournamentId(id, players) {
+        return axios.post(`/tournaments/${id}/bracket`, players);
     },
     getUsersByMatchId(id) {
         return axios.get(`matches/${id}/players`)
@@ -23,5 +23,4 @@ export default {
     getPlayersByTournamentId(id) {
         return axios.get(`/tournaments/${id}/players`)
     }
-
 }

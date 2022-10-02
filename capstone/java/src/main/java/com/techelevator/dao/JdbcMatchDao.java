@@ -44,14 +44,15 @@ public class JdbcMatchDao implements MatchDao{
     // To Do
     @Override
     public List<Match> generateMatches(List<UserDTO> winnerList, int tournamentId) {
-        Collections.shuffle(winnerList);
         int round = 1;
         Match match = findLastMatchByTournamentId(tournamentId);
         if (match != null) {
             round = match.getRound();
             round++;
         }
-
+        if (round == 1) {
+            Collections.shuffle(winnerList);
+        }
         String sql = "INSERT INTO matches (tournament_id, home_player, away_player, round) VALUES (?,?,?,?)";
         if (!isPowerOfTwo(winnerList.size())) {
             UserDTO playerOne = winnerList.remove(0);
@@ -66,6 +67,38 @@ public class JdbcMatchDao implements MatchDao{
         }
         return findMatchesByRoundAndTournamentId(tournamentId, round);
 
+    }
+    @Override
+    public Bracket generateBracket(int tournamentId, List<UserDTO> winnerList) {
+        int roundNumber = 1;
+        Match match = findLastMatchByTournamentId(tournamentId);
+        if (match != null) {
+            roundNumber = match.getRound();
+            roundNumber++;
+        }
+        if (roundNumber == 1) {
+            Collections.shuffle(winnerList);
+        }
+        String sql = "INSERT INTO matches (tournament_id, home_player, away_player, round) VALUES (?,?,?,?)";
+        if (!isPowerOfTwo(winnerList.size())) {
+            UserDTO playerOne = winnerList.remove(0);
+            jdbcTemplate.update(sql, tournamentId, playerOne.getUsername(), "none", roundNumber);
+        }
+        if (winnerList.size() % 2 == 1) {
+            UserDTO playerOne = winnerList.remove(0);
+            jdbcTemplate.update(sql, tournamentId, playerOne.getUsername(), -1, roundNumber);
+        }
+        for (int i = 1; i < winnerList.size(); i+=2) {
+            jdbcTemplate.update(sql, tournamentId, winnerList.get(i-1).getUsername(), winnerList.get(i).getUsername(), roundNumber);
+        }
+        List<Round> rounds = new ArrayList<>();
+        for (int i = 1; i <= roundNumber; i++) {
+            Round round = new Round(i);
+            round.setMatches(findMatchesByRoundAndTournamentId(tournamentId, i));
+            rounds.add(round);
+        }
+        Bracket bracket = new Bracket(tournamentId, rounds);
+        return bracket;
     }
 
     @Override
@@ -142,6 +175,7 @@ public class JdbcMatchDao implements MatchDao{
         match.setHomePlayer(rs.getString("home_player"));
         match.setAwayPlayer(rs.getString("away_player"));
         match.setWinner(rs.getString("winner"));
+        match.setRound(rs.getInt("round"));
         return match;
     }
 
