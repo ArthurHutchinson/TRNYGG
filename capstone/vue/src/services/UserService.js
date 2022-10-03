@@ -6,5 +6,8 @@ export default {
     },
     getUserById(id) {
         return axios.get(`/user/${id}`)
+    },
+    getUserDTOByUsername(username) {
+        return axios.get(`/userDTO/${username}`)
     }
 }
