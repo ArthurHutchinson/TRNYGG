@@ -22,30 +22,32 @@
               <p class = "tournament-status-text" v-if="tournament.status != 'open' && tournament.status != 'closed'">Something is wrong</p>
           </div> -->
 
-        <b-col md="4">
-        <b-card
-            id="t-card"
-            img-alt="Image"
-            img-top
-            tag="article"
-            style="max-width: 20rem;"
-            class="mb-2"
-        >
+        <b-col lg="3">
+            <b-card
+                id="t-card"
+                tag="article"
+                style="max-width: 20rem;"
+                class="mb-2"
+            >
+            
+                <b-card-img top id='tournament-icon' v-if="tournament.imgUrl==''" src="https://i.ibb.co/KNWQNzx/trnygg.png" style="object-fit: scale-down !important;"/> 
+                <b-card-img top id='tournament-icon' v-if="tournament.imgUrl==null" src="https://i.ibb.co/KNWQNzx/trnygg.png" style="object-fit: scale-down !important;"/>
+                <b-card-img top id='tournament-icon' v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl"/>
+                
 
-        <b-card-img class='tournament-icon' v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl"/>
+                <b-card-title>{{tournament.tournamentName}}</b-card-title>
+                <b-card-sub-title>Game: {{tournament.game}}</b-card-sub-title>
+                <b-card-sub-title>Host: {{tournament.organizerName}}</b-card-sub-title>
+                <b-card-sub-title>Start Date: {{tournament.fromDate}}</b-card-sub-title>
+                <b-card-sub-title>End Date: {{tournament.toDate}}</b-card-sub-title>
 
-        <b-card-title>{{tournament.tournamentName}}</b-card-title>
-        <b-card-sub-title>Game: {{tournament.game}}</b-card-sub-title>
-        <b-card-sub-title>Host: {{tournament.organizerName}}</b-card-sub-title>
-        <b-card-sub-title>Start Date: {{tournament.fromDate}}</b-card-sub-title>
-        <b-card-sub-title>End Date: {{tournament.toDate}}</b-card-sub-title>
+                <b-card-text>
+                    TODO: Add Description of Card
+                </b-card-text>
 
-        <b-card-text>
-            TODO: Add Description of Card
-        </b-card-text>
-
-        <b-button v-bind:to="{name: 'tournament-page', params: {id: tournament.tournamentId}}">Tournament Page</b-button>
-        </b-card>
+                <b-button id="t-page-button" v-bind:to="{name: 'tournament-page', params: {id: tournament.tournamentId}}">Tournament Page</b-button>
+            
+            </b-card>
         </b-col>
     
         
@@ -67,10 +69,19 @@ export default {
         color: #fff;
     }
 
-    /* .tournament-icon {
-        width: 200px;
-        height: 50%;
-    } */
+    #tournament-icon {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+
+        height: 10em;
+        width: 100%;
+        object-fit:cover;
+        object-position: 50% 50%;
+
+        border:3px solid #825AB7;
+        border-radius: 5px;
+    }
 
     #t-card {
         color: black;
@@ -78,5 +89,17 @@ export default {
         color:white;
         border:3px solid #825AB7;
     }
+
+    #t-page-button {
+        font-family: 'Chakra Petch', sans-serif;
+        background-color: #FC7900;
+        border: none;
+    }
+
+    #t-page-button:hover {
+        background-color: #c45f00;;
+    }
+
+
 
 </style>

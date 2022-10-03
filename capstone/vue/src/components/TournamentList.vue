@@ -8,7 +8,7 @@
     <!-- to tournament card below, add v-if search term is blank -->
     
     <b-container id="t-list-b-container">
-    <b-row align-v="center">
+    <b-row>
       <tournament-card v-bind:tournament="tournament" v-for="tournament in filteredTournaments" v-bind:key="tournament.id" class ="t-card-in-list" />
     </b-row>
     </b-container>
@@ -56,5 +56,9 @@ export default {
 </script>
 
 <style>
-
+#t-search-bar {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 10px;
+}
 </style>
