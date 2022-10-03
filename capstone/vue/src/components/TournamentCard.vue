@@ -30,8 +30,8 @@
                 class="mb-2"
             >
             
-                <b-card-img top id='tournament-icon' v-if="tournament.imgUrl==''" src="https://i.ibb.co/KNWQNzx/trnygg.png" style="object-fit: scale-down !important;"/> 
-                <b-card-img top id='tournament-icon' v-if="tournament.imgUrl==null" src="https://i.ibb.co/KNWQNzx/trnygg.png" style="object-fit: scale-down !important;"/>
+                <b-card-img top id='tournament-icon' v-if="tournament.imgUrl==''" src="http://localhost:8080/img/trnygg.d399dc61.png" style="object-fit: scale-down !important;"/> 
+                <b-card-img top id='tournament-icon' v-if="tournament.imgUrl==null" src="http://localhost:8080/img/trnygg.d399dc61.png" style="object-fit: scale-down !important;"/>
                 <b-card-img top id='tournament-icon' v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl"/>
                 
 
@@ -40,10 +40,6 @@
                 <b-card-sub-title>Host: {{tournament.organizerName}}</b-card-sub-title>
                 <b-card-sub-title>Start Date: {{tournament.fromDate}}</b-card-sub-title>
                 <b-card-sub-title>End Date: {{tournament.toDate}}</b-card-sub-title>
-
-                <b-card-text>
-                    TODO: Add Description of Card
-                </b-card-text>
 
                 <b-button id="t-page-button" v-bind:to="{name: 'tournament-page', params: {id: tournament.tournamentId}}">Tournament Page</b-button>
             
@@ -94,6 +90,9 @@ export default {
         font-family: 'Chakra Petch', sans-serif;
         background-color: #FC7900;
         border: none;
+
+        position: relative;
+        top: 5px;
     }
 
     #t-page-button:hover {
