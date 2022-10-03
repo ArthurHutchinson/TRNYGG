@@ -2,7 +2,7 @@
   <div class="tournament-list2">
     <div id="t-search-bar">
         <b-form id="t-search-bar-form">
-          <b-form-input size="sm" type="search" placeholder="Search" v-model="searchTerm"></b-form-input>
+          <b-form-input id="t-search-bar-form-input" size="sm" type="search" placeholder="Search Tournament Name, Game, or Organizer's Name Here" v-model="searchTerm"></b-form-input>
         </b-form>
     </div>
     <!-- to tournament card below, add v-if search term is blank -->
@@ -57,8 +57,12 @@ export default {
 
 <style>
 #t-search-bar {
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 30vw;
+    padding-right: 30vw;
     padding-bottom: 10px;
+}
+
+#t-search-bar-form-input {
+    text-align: center;
 }
 </style>

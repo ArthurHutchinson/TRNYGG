@@ -32,7 +32,7 @@
             
                 <b-card-img top id='tournament-icon' v-if="tournament.imgUrl==''" src="http://localhost:8080/img/trnygg.d399dc61.png" style="object-fit: scale-down !important;"/> 
                 <b-card-img top id='tournament-icon' v-if="tournament.imgUrl==null" src="http://localhost:8080/img/trnygg.d399dc61.png" style="object-fit: scale-down !important;"/>
-                <b-card-img top id='tournament-icon' v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl"/>
+                <b-card-img top id='tournament-icon' v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl" @error="$event.target.src='http://localhost:8080/img/trnygg.d399dc61.png', $event.target.style='object-fit: scale-down !important;'"/>
                 
 
                 <b-card-title>{{tournament.tournamentName}}</b-card-title>
