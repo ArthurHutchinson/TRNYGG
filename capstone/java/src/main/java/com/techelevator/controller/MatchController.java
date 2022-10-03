@@ -42,24 +42,24 @@ public class MatchController {
     }
 
     // only updates winner
-    @RequestMapping(path = "match/{id}/winner", method = RequestMethod.PUT)
-    public Match setWinner (@RequestBody UserDTO userDTO, @PathVariable int id) {
-        boolean success = matchDao.setWinner(id, userDTO);
+    @RequestMapping(path = "match/{id}/winner", method = RequestMethod.POST)
+    public Match setWinner (@RequestBody String winner, @PathVariable int id) {
+        Match match = matchDao.findLastMatchByTournamentId(id);
+        boolean success = matchDao.setWinner(match.getMatchId(), winner);
         if (success) {
-            return matchDao.findMatchById(id);
+            return matchDao.findMatchById(match.getMatchId());
         } else {
             throw new MatchNotFoundException();
         }
     }
 
     @RequestMapping(path = "tournaments/{id}/startround", method = RequestMethod.POST)
-    public List<Match> generateMatches (@RequestBody List<UserDTO> winnerList, @PathVariable int id) {
-        List<Match> matchList = matchDao.generateMatches(winnerList, id);
-        return matchList;
+    public Bracket generateBracket (@RequestBody List<String> winnerList, @PathVariable int id) {
+        return matchDao.generateBracket(id,winnerList);
     }
-    @RequestMapping(path = "tournaments/{id}/bracket", method = RequestMethod.POST)
-    public Bracket generateBracket (@PathVariable int id, @RequestBody List<UserDTO> winnerList) {
-        return matchDao.generateBracket(id, winnerList);
+    @RequestMapping(path = "tournaments/{id}/bracket", method = RequestMethod.GET)
+    public Bracket loadBracket (@PathVariable int id) {
+        return matchDao.loadBracket(id);
     }
 
     @RequestMapping(path = "matches/{id}/players", method = RequestMethod.GET)
