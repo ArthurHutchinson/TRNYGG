@@ -1,6 +1,6 @@
 <template>
   <div>
-      <invite-card v-bind:invite="invite" v-for="invite in invites" v-bind:key="invite.id" />
+      <invite-card v-bind:invite="invite" v-for="invite in filteredInvites" v-bind:key="invite.id" />
   </div>
 </template>
 
@@ -24,6 +24,13 @@ export default {
         loadInvites(){
             InviteService.pendingInvites().then(response => {
                 this.invites = response.data
+            })
+        }
+    },
+    computed: {
+        filteredInvites(){
+            return this.invites.filter((invite) => {
+                return invite.type.includes('invite')
             })
         }
     },

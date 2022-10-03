@@ -15,10 +15,22 @@
 <script>
 import FooterComp from './components/AppFooter.vue'
 import NavBar from './components/NavBar.vue'
+import TournamentService from './services/TournamentService.js'
 export default {
   components: {
     NavBar,
     FooterComp,
+  },
+  data(){
+    return {
+      tournaments: [],
+    }
+  },
+
+  created(){
+    TournamentService.getTournaments().then(response => {
+      this.$store.commit('SET_TOURNAMENTS', response.data)
+    })
   },
 }
 </script>

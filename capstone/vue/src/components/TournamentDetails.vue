@@ -28,6 +28,8 @@
       <b-modal id="invite-player">
         <invite-form v-bind:tournament="tournament" />
       </b-modal>
+      <b-button v-b-modal="'player-requests'" v-if="this.$store.state.user.username == tournament.organizerName">View Requests</b-button>
+      
     </div>
       </div>
         <img class="tournament-logo" v-if="tournament.imgUrl" v-bind:src="tournament.imgUrl"/>
