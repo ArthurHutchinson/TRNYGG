@@ -14,13 +14,19 @@ export default {
     createTournament(tournament) {
         return axios.post('/tournaments/create', tournament);
     },
-    getBracketByTournamentId(id, players) {
-        return axios.post(`/tournaments/${id}/bracket`, players);
+    getBracketByTournamentId(id) {
+        return axios.get(`/tournaments/${id}/bracket`);
+    },
+    startNewRound(id, players) {
+        return axios.post(`/tournaments/${id}/startround`, players);
     },
     getUsersByMatchId(id) {
         return axios.get(`matches/${id}/players`)
     },
     getPlayersByTournamentId(id) {
         return axios.get(`/tournaments/${id}/players`)
+    },
+    setWinner(id, username) {
+        return axios.post(`match/${id}/winner`, username)
     }
 }

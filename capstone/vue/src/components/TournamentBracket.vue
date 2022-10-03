@@ -10,9 +10,10 @@
           <td>{{ match.homePlayer }}</td>
           <td rowspan="2">
             <label for="winner">Winner:</label>
-            <select v-on:change="addPlayerToWinners(this)" for="winner" id="winner">
-              <option value="match.homePlayer">{{ match.homePlayer }}</option>
-              <option value="match.awayPlayer">{{ match.awayPlayer }}</option>
+            <p v-if="match.winner != null">{{match.winner}}</p>
+            <select v-else for="winner" id="winner">
+              <option value="home">{{ match.homePlayer }}</option>
+              <option value="away">{{ match.awayPlayer }}</option>
             </select>
           </td>
         </tr>
@@ -25,7 +26,8 @@
   </div>
 </div>
 </div>
-    <button v-on:click="loadBracketForTournamentId()" id="start-round" v-if="this.$store.state.user.username == tournament.organizerName">Start Round</button>
+    <button v-on:click="startTournament()" id="start-round" v-if="this.$store.state.user.username == tournament.organizerName && this.bracket.rounds.length == 0 && !isOver">Start Tournament</button>
+    <button v-on:click="addPlayerToWinners()" id="start-round" v-else-if="this.$store.state.user.username == tournament.organizerName && this.bracket.rounds.length != 0 && !isOver">Start Next Round</button>
 </div>
 </template>
 
@@ -37,20 +39,50 @@ export default {
   data() {
     return {
       tournament: {},
-      winners: [],
       players: [],
-      bracket: {}
+      bracket: {},
+      isOver: false
     };
   },
+  computed: {
+    playerNames() {
+      let names = [];
+      this.players.forEach((player) => {
+        names.push(player.username)
+      })
+      return names;
+    }
+  },
   methods: {
-    addPlayerToWinners(username) {
-      UserService.getUserDTOByUsername(username).then ((response) => {
-        this.winners.push(response.data)
-      });
-
-    },
-     loadBracketForTournamentId() {
-      TournamentService.getBracketByTournamentId(this.id, this.players).then((response) => {
+    addPlayerToWinners() {
+        const winnersList = document.querySelectorAll('#winner')
+        console.log(winnersList)
+        let winners = [];
+          winnersList.forEach((winner) => {
+            if (winner.value == "home") {
+              winners.push(winner[0].innerText)
+            } else {
+              winners.push(winner[1].innerText)
+            }
+        });
+        console.log(winners)
+        if (winners.length != 1) {
+          this.startNextRound(winners)
+        } else {
+          this.setWinner(winners[0])
+          alert(winners[0] + " Wins The Tournament!!" )
+          this.isOver = true
+        }
+        return winners;
+      },
+    startNextRound(winners) {
+        // let winners = this.addPlayerToWinners()
+        TournamentService.startNewRound(this.id, winners).then((response) => {
+        this.bracket = response.data
+        })
+      },
+    loadBracketForTournamentId() {
+      TournamentService.getBracketByTournamentId(this.id).then((response) => {
         this.bracket = response.data;
       });
     },
@@ -69,27 +101,29 @@ export default {
         this.user = response.data;
       });
     },
-    startNextRound() {
-      TournamentService.startNextRound(this.winners).then((response) => {
-        response.data
-      })
+    startTournament() {
+
+        TournamentService.startNewRound(this.id, this.playerNames).then((response) => {
+        this.bracket = response.data
+      });
     },
     loadPlayers() {
         TournamentService.getPlayersByTournamentId(this.id).then((response) => {
             this.players = response.data;
-            this.loadBracketForTournamentId(this.id, this.players);
+            this.loadBracketForTournamentId(this.id);
         })
+    },
+    setWinner(username) {
+      TournamentService.setWinner(this.id, username).then(
+        this.loadPlayers(this.id)
+      );
     }
-  
   },
   created() {
     this.id = this.$route.params.id;
     this.loadTournamentDetails(this.id);
     this.loadPlayers(this.id)
-    // this.loadBracketForTournamentId(this.id, this.players);
   },
-  updated() {
-  }
 };
 </script>
 
@@ -125,8 +159,16 @@ export default {
   text-align: center;
   font-size: small;
   border: none;
-  padding-bottom: 10px ;
-  
+  padding-top: 25px;
+  padding-bottom: 10px;
+}
+#match > tr > :nth-child(3) > p {
+  font-weight: 600;
+  font-size: medium;
+}
+#match > tr > :nth-child(3) > select {
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 #match > tr > :nth-child(1){
   font-size: small;

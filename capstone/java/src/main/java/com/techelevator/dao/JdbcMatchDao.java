@@ -20,6 +20,10 @@ public class JdbcMatchDao implements MatchDao{
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    TournamentDao tournamentDao;
+
+
     @Override
     public int createMatch(Match match) {
         String sql = "INSERT INTO matches (tournament_id, home_player, away_player, round) VALUES (?,?,?,?)";
@@ -36,9 +40,9 @@ public class JdbcMatchDao implements MatchDao{
     }
 
     @Override
-    public boolean setWinner(int matchId, UserDTO UserDTO) {
+    public boolean setWinner(int matchId, String winner) {
         String sql = "UPDATE matches SET winner = ? WHERE match_id = ?";
-        return jdbcTemplate.update(sql, UserDTO.getUsername(), matchId) == 1;
+        return jdbcTemplate.update(sql, winner, matchId) == 1;
     }
 
     // To Do
@@ -60,7 +64,7 @@ public class JdbcMatchDao implements MatchDao{
         }
         if (winnerList.size() % 2 == 1) {
             UserDTO playerOne = winnerList.remove(0);
-            jdbcTemplate.update(sql, tournamentId, playerOne.getUsername(), -1, round);
+            jdbcTemplate.update(sql, tournamentId, playerOne.getUsername(), "none", round);
         }
         for (int i = 1; i < winnerList.size(); i+=2) {
             jdbcTemplate.update(sql, tournamentId, winnerList.get(i-1).getUsername(), winnerList.get(i).getUsername(), round);
@@ -68,30 +72,61 @@ public class JdbcMatchDao implements MatchDao{
         return findMatchesByRoundAndTournamentId(tournamentId, round);
 
     }
+
     @Override
-    public Bracket generateBracket(int tournamentId, List<UserDTO> winnerList) {
+    public Bracket generateBracket(int tournamentId, List<String> winnerListStr) {
+        List<UserDTO> winnerList = new ArrayList<>();
+        for (String winner : winnerListStr) {
+            UserDTO userDTO = userDao.findUserDTOByUsername(winner);
+            winnerList.add(userDTO);
+        }
         int roundNumber = 1;
         Match match = findLastMatchByTournamentId(tournamentId);
         if (match != null) {
             roundNumber = match.getRound();
             roundNumber++;
         }
+
+        Round lastRound = new Round(roundNumber - 1);
+        if (lastRound.getRoundNumber() != 0) {
+            List<Match> lastRoundMatches = findMatchesByRoundAndTournamentId(tournamentId, lastRound.getRoundNumber());
+            for (int i = 0; i < lastRoundMatches.size(); i++) {
+                setWinner(lastRoundMatches.get(i).getMatchId(), winnerListStr.get(i));
+            }
+        }
+
         if (roundNumber == 1) {
             Collections.shuffle(winnerList);
         }
         String sql = "INSERT INTO matches (tournament_id, home_player, away_player, round) VALUES (?,?,?,?)";
         if (!isPowerOfTwo(winnerList.size())) {
             UserDTO playerOne = winnerList.remove(0);
-            jdbcTemplate.update(sql, tournamentId, playerOne.getUsername(), "none", roundNumber);
+            jdbcTemplate.update(sql, tournamentId, playerOne.getUsername(), "-bye-", roundNumber);
         }
         if (winnerList.size() % 2 == 1) {
             UserDTO playerOne = winnerList.remove(0);
-            jdbcTemplate.update(sql, tournamentId, playerOne.getUsername(), -1, roundNumber);
+            jdbcTemplate.update(sql, tournamentId, playerOne.getUsername(), "-bye-", roundNumber);
         }
         for (int i = 1; i < winnerList.size(); i+=2) {
             jdbcTemplate.update(sql, tournamentId, winnerList.get(i-1).getUsername(), winnerList.get(i).getUsername(), roundNumber);
         }
         List<Round> rounds = new ArrayList<>();
+        for (int i = 1; i <= roundNumber; i++) {
+            Round round = new Round(i);
+            round.setMatches(findMatchesByRoundAndTournamentId(tournamentId, i));
+            rounds.add(round);
+        }
+        Bracket bracket = new Bracket(tournamentId, rounds);
+        return bracket;
+    }
+    @Override
+    public Bracket loadBracket(int tournamentId) {
+        int roundNumber = 0;
+        Match match = findLastMatchByTournamentId(tournamentId);
+        List<Round> rounds = new ArrayList<>();
+        if (match != null) {
+            roundNumber = match.getRound();
+        }
         for (int i = 1; i <= roundNumber; i++) {
             Round round = new Round(i);
             round.setMatches(findMatchesByRoundAndTournamentId(tournamentId, i));
