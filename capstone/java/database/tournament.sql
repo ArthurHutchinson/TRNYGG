@@ -18,6 +18,7 @@ CREATE TABLE tournaments(
 	to_date DATE NOT NULL,
 	game VARCHAR(50),
 	img_url VARCHAR(200),
+	description VARCHAR(200),
 
 	CONSTRAINT pk_tournament_id PRIMARY KEY (tournament_id),
 	CONSTRAINT fk_organizer_id FOREIGN KEY (organizer_id) REFERENCES users(user_id)
@@ -31,13 +32,14 @@ NO MAXVALUE;
 CREATE TABLE matches(
 	match_id int NOT NULL DEFAULT nextval ('seq_match_id'),
 	tournament_id int NOT NULL,
-	home_player VARCHAR(50),
-	away_player VARCHAR(50),
-	winner VARCHAR(50),
+	home_id int NOT NULL,
+	away_id int NOT NULL,
+	winner VARCHAR(4),
 	round int NOT NULL,
 	
 	CONSTRAINT pk_match_id PRIMARY KEY (match_id),
-	CONSTRAINT fk_home_player FOREIGN KEY (home_player) REFERENCES users(username)
+	CONSTRAINT fk_home_id FOREIGN KEY (home_id) REFERENCES users(user_id),
+	CONSTRAINT fk_away_id FOREIGN KEY (away_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE tournament_user(

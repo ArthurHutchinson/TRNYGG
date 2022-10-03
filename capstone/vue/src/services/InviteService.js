@@ -7,5 +7,9 @@ export default {
 
     pendingInvites(){
         return axios.get('invites/')
+    },
+
+    updateInvite(id, inviteDTO){
+        return axios.put(`invites/${id}/update`, inviteDTO)
     }
 }
