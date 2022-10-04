@@ -4,6 +4,18 @@ import router from './router/index'
 import store from './store/index'
 import axios from 'axios'
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faUser} from '@fortawesome/free-solid-svg-icons'
+library.add(faUser)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+// new Vue({
+//   el: '#app',
+//   components: { App },
+//   template: '<App/>'
+// })
+
+Vue.config.productionTip = false
 
 Vue.config.productionTip = false
 

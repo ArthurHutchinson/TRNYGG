@@ -69,6 +69,7 @@ export default {
         if (winners.length != 1) {
           this.startNextRound(winners)
         } else {
+          console.log(winners[0].length)
           this.setWinner(winners[0])
           alert(winners[0] + " Wins The Tournament!!" )
           this.isOver = true
@@ -131,9 +132,12 @@ export default {
 #parent-div{
   display: flex;
   flex-direction: column;
+  font-family: 'Chakra Petch', sans-serif;
 }
 #container {
   display: flex;
+  width: 100vw;
+  /* height: 100vh ; */
 }
 #tournament-bracket{
   display: flex;
@@ -141,16 +145,12 @@ export default {
 #match {
 
         color: #fff;
-        background-color: #75757e;
-        border-radius: 10px;
-        width: 300px;
+        width: 500px;
         height: 80px;
         margin: 50px;
-        border: 1px solid black;
 }
 #match > tr > td {
   text-align: center;
-  border: 1px solid black;
   width: 100px;
   height: 40px;
   max-height: 40px;
@@ -161,21 +161,44 @@ export default {
   border: none;
   padding-top: 25px;
   padding-bottom: 10px;
+  background-color: #FC7900;
+  width: 1fr;
 }
 #match > tr > :nth-child(3) > p {
-  font-weight: 600;
-  font-size: medium;
+  font-weight: 100;
+  font-size: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+  
 }
 #match > tr > :nth-child(3) > select {
-  font-weight: 600;
+  font-weight: 100;
   margin-bottom: 10px;
+  font-size: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 85%;
+  background-color: #df6d03;
+  color: white;
+  font-family: 'Chakra Petch', sans-serif;
+  
 }
 #match > tr > :nth-child(1){
-  font-size: small;
+  font-size: 12px;
+  background-color: #614388;
+  width: 15%;
+  
 }
 #match > tr > :nth-child(2){
-  font-size: x-large;
-  font-weight: 600;
+  font-size: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+  font-weight: 100;
+  width: 1fr;
+  background-color: #3c3c46;
+  
 }
 #tournament-bracket-round {
   display: flex;
@@ -194,7 +217,10 @@ export default {
   border: none;
   border-radius: 10px;
   align-items: end;
-
+  color: white;
+}
+#start-round:hover{
+  background-color: #614388;
 }
 
 </style>
