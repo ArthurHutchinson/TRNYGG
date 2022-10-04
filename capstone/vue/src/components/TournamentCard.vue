@@ -85,7 +85,7 @@ export default {
         object-fit: scale-down;
         object-position: 50% 50%;
 
-        border:3px solid #825AB7;
+        border:3px solid #32323A;
         border-radius: 5px;
 
     }
@@ -100,7 +100,7 @@ export default {
         object-fit:cover;
         object-position: 50% 50%;
 
-        border:3px solid #825AB7;
+        border:3px solid #32323A;
         border-radius: 5px;
     }
 
