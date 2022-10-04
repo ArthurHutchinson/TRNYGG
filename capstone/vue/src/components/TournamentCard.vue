@@ -115,7 +115,14 @@ export default {
         border:3px solid #4c4c58;
         /* border:3px solid #32323A; */
         
-        /* border: 3px solid #825AB7; */
+        
+    }
+
+    #t-card:hover {
+        border: 3px solid #825AB7;
+        box-shadow: 0 0 0 0.25rem #825AB73a;
+        /* --bs-pagination-focus-box-shadow: 0 0 0 0.25rem #FC79003a !important; */
+        
     }
 
     #t-page-button {
