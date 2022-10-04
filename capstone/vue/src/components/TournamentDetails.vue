@@ -24,9 +24,10 @@
           <li class="players-list-item" v-for="player in players" v-bind:key="player.id"><p>{{ player.username }}</p><font-awesome-icon icon="fa-user" /></li>
         </ul>
         
+        
     <div id="button">
-      <b-button id="request" v-b-modal="'invite-player'" v-if="this.$store.state.user.username == tournament.organizerName">Invite Player</b-button>
-      <b-button id="request" v-else v-on:click="requestInvite()"> Request to Join </b-button>
+      <b-button id="request" v-b-modal="'invite-player'" v-if="this.$store.state.user.username == tournament.organizerName && isFull">Invite Player</b-button>
+      <b-button id ="request" v-else-if="isFull" v-on:click="requestInvite()"> Request to Join </b-button>
       <b-modal id="invite-player">
         <invite-form v-bind:tournament="tournament" />
       </b-modal>
@@ -65,7 +66,10 @@ export default {
   computed: {
     playersInTournament() {
       return this.players.length + "/" + this.tournament.numOfParticipants;
-    }
+    },
+    isFull(){
+          return this.players.length < this.tournament.numOfParticipants
+      }
 
   },
   methods: {
