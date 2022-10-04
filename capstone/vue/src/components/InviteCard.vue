@@ -1,7 +1,9 @@
 <template>
   <div>
-      <h3> {{ tournament2.tournamentName }} </h3>
-      <h5> Host: {{ tournament2.organizerName }} </h5>
+      <h3 v-if="isRequest"> A player wants to join: {{ tournament2.tournamentName }} </h3>
+      <h3 v-else>Hey! You've been invite to: {{ tournament2.tournamentName }} </h3>
+      <h5 v-if="!isHost"> Host: {{ tournament2.organizerName }} </h5>
+      <h5 v-else> Player: {{ user.username }}  </h5>
       <p>Status : {{invite.status}} </p>
       <b-button v-if="invite.status == 'pending' && isActive" v-on:click="acceptInvite()"> Accept </b-button>
       <b-button v-if="invite.status == 'pending' && isActive" v-on:click="declineInvite()"> Reject </b-button>
@@ -11,6 +13,7 @@
 <script>
 
 import InviteService from '../services/InviteService.js'
+import UserService from '../services/UserService.js'
 
 export default {
     name: 'invite-card',
@@ -26,6 +29,8 @@ export default {
                 status: ""
             },
             isActive: true,
+            id: "",
+            user: {},
         }
     },
     methods: {
@@ -34,6 +39,7 @@ export default {
             InviteService.updateInvite(this.invite.inviteId, this.inviteDTO).then(response => {
                 if(response.status == 200){
                     this.isActive = !this.isActive
+                    this.loadPlayer(this.id)
                 }
             })
             // this.$router.go()
@@ -43,19 +49,29 @@ export default {
             InviteService.updateInvite(this.invite.inviteId, this.inviteDTO).then(response => {
                 if(response.status == 200){
                     this.isActive == !this.isActive
+                    this.loadPlayer(this.id)
                 }
             })
             // this.$router.go()
         }
     },
-    // computed: {
+    computed: {
     //     getTournament(){
     //         return this.$store.state.tournaments.filter((tournament) => {
     //             return tournament.tournamentId == this.invite.tournamentId
     //         })
     //     }
-    // },
+
+        isHost(){
+            return this.$store.state.user.username == this.tournament2.organizerName;
+        },
+        isRequest(){
+            return this.invite.type == 'request'
+        }
+     },
     created(){
+        this.id = this.$route.params.id
+        this.user = UserService.getUserDTOById(this.invite.playerId)
         this.tournament = this.$store.state.tournaments.filter((tournament) => {
                 return tournament.tournamentId == this.invite.tournamentId
     })
