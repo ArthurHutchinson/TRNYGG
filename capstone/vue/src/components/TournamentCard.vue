@@ -88,6 +88,8 @@ export default {
         border:3px solid #32323A;
         border-radius: 5px;
 
+        background-color: #32323A;
+
     }
 
     #tournament-icon {
@@ -102,6 +104,8 @@ export default {
 
         border:3px solid #32323A;
         border-radius: 5px;
+
+        background-color: #32323A;
     }
 
     #t-card {
