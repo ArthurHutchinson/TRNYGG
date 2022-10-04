@@ -19,6 +19,9 @@ public class TournamentController {
     @Autowired
     TournamentDao tournamentDao;
 
+    @Autowired
+    UserDao userDao;
+
     @RequestMapping(path = "/tournaments", method = RequestMethod.GET)
     public List<Tournament> findAllTournaments() {
         List<Tournament> tournaments = tournamentDao.findAllTournaments();
@@ -70,5 +73,11 @@ public class TournamentController {
         } else {
             throw new TournamentNotFoundException();
         }
+    }
+
+    @GetMapping(path = "/tournaments/users")
+    public List<UserDTO> getUsersByTournament(int id){
+        return userDao.allUsersInTournament(id);
+
     }
 }

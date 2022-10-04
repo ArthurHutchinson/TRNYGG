@@ -5,14 +5,16 @@
       <h5 v-if="!isHost"> Host: {{ tournament2.organizerName }} </h5>
       <h5 v-else> Player: {{ user.username }}  </h5>
       <p>Status : {{invite.status}} </p>
-      <b-button v-if="invite.status == 'pending' && isActive" v-on:click="acceptInvite()"> Accept </b-button>
-      <b-button v-if="invite.status == 'pending' && isActive" v-on:click="declineInvite()"> Reject </b-button>
+      <b-button v-if="invite.status == 'pending' && isActive && isFull" v-on:click="acceptInvite()"> Accept </b-button>
+      <b-button v-if="invite.status == 'pending' && isActive && isFull" v-on:click="declineInvite()"> Reject </b-button>
+      <p v-if="!isActive">Tournament is full</p>
   </div>
 </template>
 
 <script>
 
 import InviteService from '../services/InviteService.js'
+import TournamentService from '../services/TournamentService.js'
 import UserService from '../services/UserService.js'
 
 export default {
@@ -31,6 +33,7 @@ export default {
             isActive: true,
             id: "",
             user: {},
+            usersInTourny: [],
         }
     },
     methods: {
@@ -67,9 +70,13 @@ export default {
         },
         isRequest(){
             return this.invite.type == 'request'
+        },
+        isFull(){
+            return this.usersInTourny < this.tournament2.numOfParticipants
         }
      },
     created(){
+        this.usersInTourny = TournamentService.getPlayersByTournamentId(this.invite.tournamentId)
         this.id = this.$route.params.id
         this.user = UserService.getUserDTOById(this.invite.playerId)
         this.tournament = this.$store.state.tournaments.filter((tournament) => {
