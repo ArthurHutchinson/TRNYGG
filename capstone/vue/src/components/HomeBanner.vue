@@ -58,7 +58,7 @@ export default {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -93%);
+        transform: translate(-50%, -35%);
         
         text-shadow: -2px 2px 2px #000000;
         font-size: 1.3vw;
@@ -73,7 +73,7 @@ export default {
         padding: 0.7vw 0.8vw;
         
         position: relative;
-        top: 5px;
+        top: 35px;
     }
 
 </style>

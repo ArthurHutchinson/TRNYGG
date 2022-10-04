@@ -17,6 +17,7 @@
         :per-page="perPage"
         aria-controls="testpagination"
         align="center"
+        class="t-pagination"
     />
 
     <b-row id="testpagination">
@@ -37,6 +38,7 @@
         :per-page="perPage"
         aria-controls="testpagination"
         align="center"
+        class="t-pagination"
     />
 
     </b-container>
@@ -92,13 +94,22 @@ export default {
     padding-left: 30vw;
     padding-right: 30vw;
     padding-bottom: 10px;
+
+    position: relative;
+    bottom: 10px;
 }
 
 #t-search-bar-form-input {
     text-align: center;
 }
 
-#t-pagination-card {
-    /* padding-top: 20px; */
+
+
+</style>
+
+<style scoped>
+.pagination > li > a {
+    color: red;
 }
+
 </style>
