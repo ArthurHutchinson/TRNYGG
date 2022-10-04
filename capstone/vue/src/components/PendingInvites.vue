@@ -1,6 +1,6 @@
 <template>
   <div>
-      <invite-card v-bind:invite="invite" v-for="invite in filteredInvites" v-bind:key="invite.id" />
+      <invite-card v-bind:invite="invite" v-for="invite in invites" v-bind:key="invite.id" />
   </div>
 </template>
 
