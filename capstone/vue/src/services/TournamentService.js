@@ -27,6 +27,6 @@ export default {
         return axios.get(`/tournaments/${id}/players`)
     },
     setWinner(id, username) {
-        return axios.post(`match/${id}/winner`, username)
+        return axios.post(`match/${id}/winner`, username, {headers: {'content-type':'text/json'}})
     }
 }

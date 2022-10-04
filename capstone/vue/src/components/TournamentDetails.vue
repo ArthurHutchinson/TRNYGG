@@ -18,17 +18,17 @@
 
       <div id="players-and-img">
       <div id="player-list">
-        <ul class="players-list">
-          <li class="players-list-header">Players:</li>
-          <li class="players-list-item" v-for="player in players" v-bind:key="player.id">{{ player.username }},</li>
+        <ul id="player-list-list" class="players-list">
+          <li class="players-list-header">{{playersInTournament}} Players:</li>
+          <li class="players-list-item" v-for="player in players" v-bind:key="player.id"><p>{{ player.username }}</p><font-awesome-icon icon="fa-user" /></li>
         </ul>
     <div id="button">
-      <b-button v-b-modal="'invite-player'" v-if="this.$store.state.user.username == tournament.organizerName">Invite Player</b-button>
-      <b-button v-else v-on:click="requestInvite()"> Request to Join </b-button>
+      <b-button id="request" v-b-modal="'invite-player'" v-if="this.$store.state.user.username == tournament.organizerName">Invite Player</b-button>
+      <b-button id="request" v-else v-on:click="requestInvite()"> Request to Join </b-button>
       <b-modal id="invite-player">
         <invite-form v-bind:tournament="tournament" />
       </b-modal>
-      <b-button v-b-modal="'player-requests'" v-if="this.$store.state.user.username == tournament.organizerName">View Requests</b-button>
+      <b-button id="request" v-b-modal="'player-requests'" v-if="this.$store.state.user.username == tournament.organizerName">View Requests</b-button>
       
     </div>
       </div>
@@ -59,6 +59,12 @@ export default {
       },
       players: []
     };
+  },
+  computed: {
+    playersInTournament() {
+      return this.players.length + "/" + this.tournament.numOfParticipants;
+    }
+
   },
   methods: {
     loadTournamentDetails(id) {
@@ -116,68 +122,98 @@ export default {
 }
 @media screen and (max-width: 1099px) {
   #player-list > ul{
-      columns: 2;
-      -webkit-columns: 2;
-      -moz-columns: 2;
-      height: 200px;
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+      columns: 3;
+      -webkit-columns: 3;
+      -moz-columns: 3;
   }
   #player-list {
     display: flex;
     border: 3px solid #825AB7;
     border-radius: 20px;
-    width: 85%;
-    height: 40vh;
     margin-left: 7.5%;
     flex-direction: column;
+    background-color: #232328;
 }
 }
 @media screen and (min-width: 1100px) {
   #player-list > ul{
-      columns: 4;
-      -webkit-columns: 4;
-      -moz-columns: 4;
-      height: 200px;
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+      columns: 3;
+      -webkit-columns: 3;
+      -moz-columns: 3;
   }
   #player-list {
     display: flex;
     border: 3px solid #825AB7;
     border-radius: 20px;
-    width: 53%;
-    height: 25vh;
     margin-left: 12.5%;
     flex-direction: column;
+    align-content: flex-start;
+    max-width: 75%;
+    background-color: #232328;
+  }
 }
+#request {
+  margin-left: 10px;
+  background-color: #FC7900;
+  border: none;
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+#request:hover {
+  background-color: #c45f00;
 }
 #player-list > ul > li{
-  font-size: xx-large;
-  list-style: none;
-  justify-content: space-evenly ;
+  display: flex;
+  padding: 10px 20px;
+  color: #fff;
+  margin: 5px 0;
+  transition: .5s;
+  background-color: #614388;
+
+  align-items: center;
+  border-radius:0 10px 0 10px;
+}
+#player-list > ul > li >:nth-child(1) {
+  width: 200px;
+  margin-bottom: -2px;
   
 }
 .players-list-header{
-    font-weight: 100;
-    font-size: x-large;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: xx-large;
     justify-content: start;
     align-content: flex-start;
     margin-left: -25px;
+    text-align: center;
+    background-color: #FC7900 !important;
 }
 #players-and-img{
     display: flex;
+    width: 1000px;
 }
 #players-and-img > img{
-    margin-left: 50px;
-    max-width: 300px;
+    margin-left: 12.5%;
     margin-right: 12.5%;
+    max-width: 75%;
+    object-fit: scale-down;
 }
 #player-list > #button{
     font-weight: 100;
     font-size: x-large;
     align-self: center;
     justify-content: flex-end;
-    /* margin-left: 33%; */
-    margin-bottom: 10px;  
+    margin-bottom: 10px; 
+    margin-left: 10px; 
 }
 .players-list-item {
   list-style: none;
+  font-size: large;
+  font-family: 'Chakra Petch', sans-serif;
 }
 </style>
