@@ -108,7 +108,10 @@ export default {
         color: black;
         background-color: #232328;
         color:white;
-        border:3px solid #825AB7;
+        border:3px solid #4c4c58;
+        /* border:3px solid #32323A; */
+        
+        /* border: 3px solid #825AB7; */
     }
 
     #t-page-button {
