@@ -11,7 +11,7 @@
         </div>
         
         <br>
-        With TRNY.GG, users can create tournaments for any game type. Our bracket generator will organize teams/players into matches and allow tournament hosts to submit results for each round. Join any of our existing tournaments or create your own and invite your friends.
+        With TRNY.GG, users can create tournaments for any game type.<br>Our bracket generator will organize teams/players into matches and allow tournament hosts to submit results for each round. Join any of our existing tournaments or create your own and invite your friends.
         <br>
 
         <b-button v-bind:to="{ name: 'create-tournament-page' }" id="t-create-t-btn" v-if="$store.state.token != ''">Create Tournament</b-button>
@@ -66,14 +66,18 @@ export default {
 
     #t-create-t-btn {
         font-family: 'Chakra Petch', sans-serif;
-        background-color: #FC7900 !important;
-        border: 0px !important;
+        background-color: #FC7900;
+        border: none;
         text-shadow: 0px 0px 0px #000000;
         font-size:1vw;
         padding: 0.7vw 0.8vw;
         
         position: relative;
         top: 35px;
+    }
+
+    #t-create-t-btn:hover {
+        background-color: #c45f00;
     }
 
 </style>
