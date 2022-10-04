@@ -61,7 +61,7 @@ export default {
             // BUG, event.target.style is overwriting with element.style than catching the error.
             event.target.src="http://localhost:8080/img/trnygg.d399dc61.png";
             if(event.target.src=="http://localhost:8080/img/trnygg.d399dc61.png") {
-                event.target.style="object-fit: scale-down !important;";
+                event.target.style="object-fit: scale-down;";
             }
         }
     }
@@ -121,7 +121,7 @@ export default {
     }
 
     #t-page-button:hover {
-        background-color: #c45f00;;
+        background-color: #c45f00;
     }
 
 
