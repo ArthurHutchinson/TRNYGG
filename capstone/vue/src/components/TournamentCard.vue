@@ -30,9 +30,9 @@
                 class="mb-2"
             >
             
-                <b-card-img top id='tournament-icon' v-if="tournament.imgUrl==''" src="http://localhost:8080/img/trnygg.d399dc61.png" style="object-fit: scale-down !important;"/> 
-                <b-card-img top id='tournament-icon' v-if="tournament.imgUrl==null" src="http://localhost:8080/img/trnygg.d399dc61.png" style="object-fit: scale-down !important;"/>
-                <b-card-img top id='tournament-icon' v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl"/>
+                <b-card-img top id="no-icon-due-to-null-empty" v-if="tournament.imgUrl==''" src="http://localhost:8080/img/trnygg.d399dc61.png"/> 
+                <b-card-img top id="no-icon-due-to-null-empty" v-if="tournament.imgUrl==null" src="http://localhost:8080/img/trnygg.d399dc61.png"/>
+                <b-card-img top id='tournament-icon' v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl" @error="imageUrlAlt" />
                 
 
                 <b-card-title>{{tournament.tournamentName}}</b-card-title>
@@ -55,6 +55,15 @@ export default {
     name: 'tournament-card',
     props: {
         tournament: Object,
+    },
+    methods: {
+        imageUrlAlt(event) {
+            // BUG, event.target.style is overwriting with element.style than catching the error.
+            event.target.src="http://localhost:8080/img/trnygg.d399dc61.png";
+            if(event.target.src=="http://localhost:8080/img/trnygg.d399dc61.png") {
+                event.target.style="object-fit: scale-down !important;";
+            }
+        }
     }
 
 }
@@ -63,6 +72,22 @@ export default {
 <style>
     .tcard {
         color: #fff;
+    }
+
+    #no-icon-due-to-null-empty {
+        
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+
+        height: 10em;
+        width: 100%;
+        object-fit: scale-down;
+        object-position: 50% 50%;
+
+        border:3px solid #825AB7;
+        border-radius: 5px;
+
     }
 
     #tournament-icon {

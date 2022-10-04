@@ -10,7 +10,7 @@ public interface MatchDao {
 
     boolean updateMatch(Match match, int matchId);
 
-    boolean setWinner(int matchId, UserDTO UserDTO);
+    boolean setWinner(int matchId, String winner);
 
     List<Match> generateMatches(List<UserDTO> winnerList, int tournamentId);
 
@@ -24,6 +24,8 @@ public interface MatchDao {
 
     public Match findLastMatchByTournamentId(int tournamentId);
 
-    public Bracket generateBracket(int tournamentId, List<UserDTO> winnerList);
+    public Bracket generateBracket(int tournamentId, List<String> winnerList);
+
+    public Bracket loadBracket(int tournamentId);
 
 }
