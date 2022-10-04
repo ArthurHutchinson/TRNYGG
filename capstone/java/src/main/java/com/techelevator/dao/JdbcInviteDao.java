@@ -33,9 +33,9 @@ public class JdbcInviteDao implements InviteDao{
     @Override
     public List<Invite> getInvitesById(int userId) {
         List<Invite> invites = new ArrayList<>();
-        String sql = "SELECT * FROM invites WHERE player_id = ?";
+        String sql = "SELECT * FROM invites WHERE player_id = ? OR organizer_id = ?";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, userId);
         while (results.next()) {
             Invite invite = mapRowToInvite(results);
             invites.add(invite);

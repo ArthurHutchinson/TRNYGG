@@ -1,11 +1,12 @@
 <template>
   <div>
-    <div class="tournament-detail-box">
-      <h1 class="tournament-name">{{ tournament.tournamentName }}</h1>
+    
+        <div class="tournament-detail-box">
+            <h1 class="tournament-name">{{ tournament.tournamentName }}</h1>
 
-      <h2 class="tournament-game">
+            <h2 class="tournament-game">
         Single-Elimination {{ tournament.game }} Tournament
-      </h2>
+            </h2>
       <span>
         <h4 class="host-name">Hosted By: {{ tournament.organizerName }}</h4>
       </span>
@@ -22,6 +23,7 @@
           <li class="players-list-header">Players:</li>
           <li class="players-list-item" v-for="player in players" v-bind:key="player.id">{{ player.username }},</li>
         </ul>
+        
     <div id="button">
       <b-button v-b-modal="'invite-player'" v-if="this.$store.state.user.username == tournament.organizerName">Invite Player</b-button>
       <b-button v-else v-on:click="requestInvite()"> Request to Join </b-button>
@@ -29,12 +31,13 @@
         <invite-form v-bind:tournament="tournament" />
       </b-modal>
       <b-button v-b-modal="'player-requests'" v-if="this.$store.state.user.username == tournament.organizerName">View Requests</b-button>
+    
       
     </div>
       </div>
         <img class="tournament-logo" v-if="tournament.imgUrl" v-bind:src="tournament.imgUrl"/>
       </div>
-
+    
   </div>
 </template>
 

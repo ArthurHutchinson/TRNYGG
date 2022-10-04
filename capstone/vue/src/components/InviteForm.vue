@@ -33,6 +33,7 @@ export default {
             },
             userId: "",
             username: "",
+            id: ""
         }
     },
     methods: {
@@ -58,7 +59,10 @@ export default {
         newMethod(){
             InviteService.createInvite(this.invite).then(response => {
                 if (response.status === 200){
-                    this.$router.push({name: 'home'})
+                    // this.$router.push({name: 'home'})
+                    // this.loadPlayer(this.id)
+                    // this.$router.push({name:'tournament-page', params:{id:this.invite.tournamentId} })
+                    this.$bvModal.hide('invite-player')
                 }else {
                     this.isPageStatusBad = true;
                 }
@@ -69,6 +73,7 @@ export default {
     create(){
         this.invite.tournamentId = this.tournament.tournamentId
         this.invite.organizerId = this.tournament.organizerId
+        this.id = this.$route.params.id
     }
 
 }
