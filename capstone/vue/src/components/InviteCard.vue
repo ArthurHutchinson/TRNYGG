@@ -1,14 +1,22 @@
 <template>
-  <div>
-      <h3 v-if="isRequest"> A player wants to join: {{ tournament2.tournamentName }} </h3>
-      <h3 v-else>Hey! You've been invite to: {{ tournament2.tournamentName }} </h3>
-      <h5 v-if="!isHost"> Host: {{ tournament2.organizerName }} </h5>
-      <h5 v-else> Player: {{ user.username }}  </h5>
-      <p>Status : {{invite.status}} </p>
-      <b-button v-if="invite.status == 'pending' && isActive && isFull" v-on:click="acceptInvite(),reloadPage()"> Accept </b-button>
-      <b-button v-if="invite.status == 'pending' && isActive && isFull" v-on:click="declineInvite(),reloadPage()"> Reject </b-button>
-      <p v-if="!isFull">Tournament is full</p>
-  </div>
+<div id="invite-container">
+    <div id="invite-card-and-img">
+        <div class="logo-div">
+       <b-img class="invite-tournament-logo" v-if="tournament2.imgUrl" v-bind:src="tournament2.imgUrl"/>
+       <b-img class="invite-tournament-logo" v-else src="http://localhost:8080/img/trnygg.d399dc61.png"/>
+        </div>
+        <div id="invite-card">
+            <h3 v-if="isRequest"> A player wants to join: {{ tournament2.tournamentName }} </h3>
+            <h3 v-else>Hey! You've been invite to: {{ tournament2.tournamentName }} </h3>
+            <h5 v-if="!isHost"> Host: {{ tournament2.organizerName }} </h5>
+            <h5 v-else> Player: {{ user.username }}  </h5>
+            <p>Status : {{invite.status}} </p>
+            <b-button id="accept" v-if="invite.status == 'pending' && isActive && isFull" v-on:click="acceptInvite(),reloadPage()"> Accept </b-button>
+            <b-button id="reject" v-if="invite.status == 'pending' && isActive && isFull" v-on:click="declineInvite(),reloadPage()"> Reject </b-button>
+            <p v-if="!isFull">Tournament is full</p>
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -94,5 +102,72 @@ export default {
 </script>
 
 <style>
+
+#invite-card-and-img {
+    display: flex;
+    border:3px solid #4c4c58;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    height: 30vh;
+    max-width: 66%;
+    margin-left: 16.5%;
+    /* justify-content: space-around; */
+    background-color: #232328;
+}
+#invite-card-and-img:hover {
+    border: 3px solid #825AB7;
+    box-shadow: 0 0 5px 0.30rem #825AB73a;
+
+
+}
+#invite-card {
+    display: block;
+    text-align: center;
+    font-family: 'Chakra Petch', sans-serif;
+    height: .7fr;
+    margin: auto;
+
+}
+
+.invite-tournament-logo {
+    align-self: center;
+    object-fit: cover;
+    object-position: 50% 50%;
+    max-width: 20vw;
+    max-height: 30vh;
+    border-radius: 5px;
+
+}
+.logo-div {
+    display: flex;
+    height: 25vh;
+    width: 20.3vw;
+    border: 3px solid #32323A;
+    border-radius: 5px;
+    object-fit: cover;
+    object-position: 50% 50%;
+    align-self: center;
+}
+#reject{
+    margin: 10px;
+    width: 150px;
+    height: 50px;
+    background-color: #FC7900;
+    border: none;
+}
+#accept{
+    margin: 10px;
+    width: 150px;
+    height: 50px;
+    background-color: #825AB7;
+    border: none;
+}
+#accept:hover{
+    background-color: #614388;
+}
+#reject:hover{
+    background-color: #c45f00;
+}
 
 </style>
