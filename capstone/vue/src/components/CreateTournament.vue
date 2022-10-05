@@ -113,7 +113,7 @@ export default {
         border: none;
     }
 
-    #t-btn-crt-trn:hover {
+    #t-save-trn-btn:hover {
         background-color: #c45f00;
     }
 </style>
