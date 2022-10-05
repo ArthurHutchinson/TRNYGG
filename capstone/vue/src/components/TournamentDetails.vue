@@ -31,7 +31,7 @@
       <b-modal id="invite-player">
         <invite-form v-bind:tournament="tournament" />
       </b-modal>
-      <b-button id="request" v-b-modal="'player-requests'" v-if="this.$store.state.user.username == tournament.organizerName">View Requests</b-button>
+      <b-button id="request" v-b-modal="'player-requests'" v-if="this.$store.state.user.username == tournament.organizerName" v-bind:to="{ name: 'user' }">View Requests</b-button>
       
     </div>
       </div>
