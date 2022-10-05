@@ -82,12 +82,12 @@ export default {
         await TournamentService.getPlayersByTournamentId(this.invite.tournamentId).then(response => {
             this.usersInTourny = response.data
         })
-        this.id = this.$route.params.id
-        this.user = UserService.getUserDTOById(this.invite.playerId)
-        this.tournament = this.$store.state.tournaments.filter((tournament) => {
+        this.id = await this.$route.params.id
+        this.user = await UserService.getUserDTOById(this.invite.playerId)
+        this.tournament = await this.$store.state.tournaments.filter((tournament) => {
                 return tournament.tournamentId == this.invite.tournamentId
     })
-        this.tournament2 = this.tournament[0]
+        this.tournament2 = await this.tournament[0]
     }
 
 }
