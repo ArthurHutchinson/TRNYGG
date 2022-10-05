@@ -7,7 +7,7 @@
       <p>Status : {{invite.status}} </p>
       <b-button v-if="invite.status == 'pending' && isActive && isFull" v-on:click="acceptInvite()"> Accept </b-button>
       <b-button v-if="invite.status == 'pending' && isActive && isFull" v-on:click="declineInvite()"> Reject </b-button>
-      <p v-if="!isActive">Tournament is full</p>
+      <p v-if="!isFull">Tournament is full</p>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
     },
     data(){
         return {
-            tournament: [],
+            tournament: {},
             tournament2: {},
             inviteDTO: {
                 inviteId: this.invite.inviteId,
@@ -72,11 +72,13 @@ export default {
             return this.invite.type == 'request'
         },
         isFull(){
-            return this.usersInTourny < this.tournament2.numOfParticipants
+            return this.usersInTourny.length < this.tournament2.numOfParticipants
         }
      },
     created(){
-        this.usersInTourny = TournamentService.getPlayersByTournamentId(this.invite.tournamentId)
+        TournamentService.getPlayersByTournamentId(this.invite.tournamentId).then(response => {
+            this.usersInTourny = response.data
+        })
         this.id = this.$route.params.id
         this.user = UserService.getUserDTOById(this.invite.playerId)
         this.tournament = this.$store.state.tournaments.filter((tournament) => {
