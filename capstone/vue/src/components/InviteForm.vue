@@ -4,12 +4,13 @@
           <div id="field">
               <label for="username">Username of player to add:</label>
               <input type="text" v-model="username">
+              <p v-if="isPageStatusBad">Sorry! There was an error! Cannot invite that player at this time!</p>
           </div>
           <div id="actions">
               <button type="submit" v-on:click="sendInvite()">Submit</button>
+            
           </div>
       </form>
-      <p v-if="isPageStatusBad">Something is wrong, refresh</p>
   </div>
 </template>
 
@@ -58,13 +59,14 @@ export default {
 
         newMethod(){
             InviteService.createInvite(this.invite).then(response => {
+
                 if (response.status === 200){
                     // this.$router.push({name: 'home'})
                     // this.loadPlayer(this.id)
                     // this.$router.push({name:'tournament-page', params:{id:this.invite.tournamentId} })
                     this.$bvModal.hide('invite-player')
                 }else {
-                    this.isPageStatusBad = true;
+                    this.$bvModal.hide('invite-player')
                 }
             })
         }
