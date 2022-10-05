@@ -7,6 +7,6 @@ createdb -U postgres $DATABASE &&
 psql -U postgres -d $DATABASE -f "$BASEDIR/schema.sql" &&
 psql -U postgres -d $DATABASE -f "$BASEDIR/data.sql" &&
 psql -U postgres -d $DATABASE -f "$BASEDIR/user.sql" &&
-# psql -U postgres -d $DATABASE -f "$BASEDIR/tournament.sql" &&
-psql -U postgres -d $DATABASE -f "$BASEDIR/tournamentdemo.sql" &&
+psql -U postgres -d $DATABASE -f "$BASEDIR/tournament.sql" &&
+# psql -U postgres -d $DATABASE -f "$BASEDIR/tournamentdemo.sql" &&
 psql -U postgres -d $DATABASE -f "$BASEDIR/userSQLWORK.sql"
