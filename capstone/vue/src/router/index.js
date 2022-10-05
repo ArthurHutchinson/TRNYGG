@@ -9,6 +9,7 @@ import TestPage from '../views/TestPage.vue'
 import TournamentPage from '../views/TournamentPage.vue'
 import CreateTournament from '../views/CreateTournament.vue'
 import TSearchResult from '../views/TSearchResults.vue'
+import TournamentEditPage from '../views/TournamentEditPage.vue'
 
 
 // import TournamentPage from '../views/TournamentPage.vue'
@@ -88,6 +89,14 @@ const router = new Router({
       component: TournamentPage,
       meta: {
         requiresAuth: false
+      }
+    },
+    {
+      path: "/tournament/:id/edit",
+      name: "tournament-page-edit",
+      component: TournamentEditPage,
+      meta: {
+        requiresAuth: true
       }
     },
     {
