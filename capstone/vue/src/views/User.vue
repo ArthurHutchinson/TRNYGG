@@ -1,7 +1,6 @@
 <template>
   <div>
       <select-avatar/>
-      <h1>Pending Invites</h1>
       <pending-invites />
       <!-- <h3>Tournaments Participating</h3>
       <tournament-card
