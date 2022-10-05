@@ -30,7 +30,7 @@
                 class="mb-2"
             >
             
-                <b-card-img top id='tournament-icon' v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl"/>
+                <b-card-img top id='tournament-icon' v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl" @error="imageUrlAlt"/>
                 <b-card-img top id="no-icon-due-to-null-empty" v-else src="http://localhost:8080/img/trnygg.d399dc61.png"/> 
                 
                 <!--  {{ username.substring(0,10)+".." }} MAybe use a if to detect if length is greater than 10-->
