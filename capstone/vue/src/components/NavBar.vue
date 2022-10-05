@@ -13,7 +13,8 @@
       <div id="tlinks">
         <b-button id="alogin" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</b-button>
         <b-button id="aregister" v-bind:to="{ name: 'register' }" v-if="$store.state.token == ''"> Register</b-button>
-        <b-button id="auser" v-bind:to="{ name: 'user' }" v-if="$store.state.token != ''">User</b-button>
+        <p id="nav-username" v-if="$store.state.token != ''"> <font-awesome-icon id="user-icon-nav" icon="fa-user" />{{$store.state.user.username}}</p>
+        <b-button id="auser" v-bind:to="{ name: 'user' }" v-if="$store.state.token != ''">Profile</b-button>
         <b-button id="alogout" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</b-button>
       </div>
     </b-navbar-nav>
@@ -29,6 +30,17 @@ export default {
 </script>
 
 <style>
+    #nav-username {
+      margin-bottom: -5px;
+      font-family: 'Chakra Petch', sans-serif;
+      position: relative;
+      right: 20px;
+      top: 5px
+    }
+    #user-icon-nav {
+      margin-right: 5px;
+    }
+    
 
     #tnav {
         display: flex;
