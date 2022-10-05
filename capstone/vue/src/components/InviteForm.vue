@@ -1,16 +1,16 @@
 <template>
   <div>
-      <form v-on:submit.prevent>
+      <b-form v-on:submit.prevent>
           <div id="field">
-              <label for="username">Username of player to add:</label>
-              <input type="text" v-model="username">
+              <label for="username">Enter Username to Invite:</label>
+              <b-form-input type="text" v-model="username"/>
               <p v-if="isPageStatusBad">Sorry! There was an error! Cannot invite that player at this time!</p>
           </div>
           <div id="actions">
-              <button type="submit" v-on:click="sendInvite()">Submit</button>
+              <b-button id="t-inv-form-btn" type="submit" v-on:click="sendInvite()">Submit</b-button>
             
           </div>
-      </form>
+      </b-form>
   </div>
 </template>
 
@@ -82,5 +82,20 @@ export default {
 </script>
 
 <style>
+#t-inv-form-btn {
+    color: #FFFFFF;
+    background-color: #FC7900;
+    border: none;
 
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+
+    position: relative;
+    top: 10px;
+}
+
+#t-inv-form-btn:hover {
+    background-color: #c45f00;
+}
 </style>

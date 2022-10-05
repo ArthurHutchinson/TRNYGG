@@ -28,11 +28,14 @@
     <div id="button">
       <b-button id="request" v-b-modal="'invite-player'" v-if="this.$store.state.user.username == tournament.organizerName && isFull">Invite Player</b-button>
       <b-button id ="request" v-else-if="isFull" v-on:click="requestInvite()"> Request to Join </b-button>
-      <b-modal id="invite-player">
+      <b-modal id="invite-player" hide-footer>
+        <template #modal-title>
+          Invite Player
+        </template>
         <invite-form v-bind:tournament="tournament" />
       </b-modal>
       <b-button id="request" v-b-modal="'player-requests'" v-if="this.$store.state.user.username == tournament.organizerName" v-bind:to="{ name: 'user' }">View Requests</b-button>
-      <b-button id="t-edit-page" v-if="$store.state.user.id == tournament.organizerId" v-bind:to="{name: 'tournament-page-edit', params: {id: tournament.tournamentId}}">Edit Tournament</b-button>
+      <b-button id="request" v-if="$store.state.user.id == tournament.organizerId" v-bind:to="{name: 'tournament-page-edit', params: {id: tournament.tournamentId}}">Edit Tournament</b-button>
     </div>
       </div>
         <img class="tournament-logo" v-if="tournament.imgUrl" v-bind:src="tournament.imgUrl"/>
@@ -230,5 +233,10 @@ export default {
 
   /* position: relative;
   top: 5px; */
+}
+
+#invite-player {
+  --bs-modal-bg: #232328;
+  --bs-modal-color: white;
 }
 </style>
