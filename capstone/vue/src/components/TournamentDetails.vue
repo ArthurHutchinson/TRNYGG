@@ -21,7 +21,10 @@
       <div id="player-list">
         <ul id="player-list-list" class="players-list">
           <li class="players-list-header">{{playersInTournament}} Players:</li>
-          <li class="players-list-item" v-for="player in players" v-bind:key="player.id"><p>{{ player.username }}</p><font-awesome-icon icon="fa-user" /></li>
+          <li class="players-list-item" v-for="player in players" v-bind:key="player.id"><p>{{ player.username }}</p>
+            <font-awesome-icon v-if="tournament.organizerId == player.id" icon="fa-crown" />
+            <font-awesome-icon v-else icon="fa-user"/>
+          </li>
         </ul>
         
         

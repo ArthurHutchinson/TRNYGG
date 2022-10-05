@@ -6,8 +6,8 @@ import axios from 'axios'
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUser} from '@fortawesome/free-solid-svg-icons'
-library.add(faUser)
+import { faCrown, faUser} from '@fortawesome/free-solid-svg-icons'
+library.add(faUser, faCrown)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 // new Vue({
 //   el: '#app',
