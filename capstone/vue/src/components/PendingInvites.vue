@@ -1,6 +1,6 @@
 <template>
-  <div>
-      <h1 id="title" style="text-align: center">Pending Invites:</h1>
+  <div id="t-pend-invites-div">
+      <h1 id="t-pend-title" style="text-align: center">Pending Invites:</h1>
       <invite-card v-bind:invite="invite" v-for="invite in invites" v-bind:key="invite.id" />
   </div>
 </template>
@@ -43,8 +43,12 @@ export default {
 </script>
 
 <style>
-#title {
+#t-pend-title {
   font-family: 'Chakra Petch', sans-serif;  
 
+}
+
+#t-pend-invites-div {
+    padding-top: 10px
 }
 </style>
