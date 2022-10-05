@@ -45,7 +45,6 @@ public class JdbcMatchDao implements MatchDao{
         return jdbcTemplate.update(sql, winner, matchId) == 1;
     }
 
-    // To Do
     @Override
     public List<Match> generateMatches(List<UserDTO> winnerList, int tournamentId) {
         int round = 1;
@@ -99,11 +98,7 @@ public class JdbcMatchDao implements MatchDao{
             Collections.shuffle(winnerList);
         }
         String sql = "INSERT INTO matches (tournament_id, home_player, away_player, round) VALUES (?,?,?,?)";
-        if (!isPowerOfTwo(winnerList.size())) {
-            UserDTO playerOne = winnerList.remove(0);
-            jdbcTemplate.update(sql, tournamentId, playerOne.getUsername(), "-bye-", roundNumber);
-        }
-        if (winnerList.size() % 2 == 1) {
+        while (!isPowerOfTwo(winnerList.size())) {
             UserDTO playerOne = winnerList.remove(0);
             jdbcTemplate.update(sql, tournamentId, playerOne.getUsername(), "-bye-", roundNumber);
         }

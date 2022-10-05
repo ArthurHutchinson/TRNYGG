@@ -60,7 +60,6 @@ public class JdbcTournamentDao implements TournamentDao{
         }
     }
 
-    // No Controller Endpoint...Maybe Redundant??
     @Override
     public int findIdByTournamentName(String tournamentName) {
         if (tournamentName == null) throw new IllegalArgumentException("Tournament Name cannot be Null");
@@ -73,7 +72,6 @@ public class JdbcTournamentDao implements TournamentDao{
         return tournamentId;
     }
 
-    // should this go in UserDao??
     @Override
     public List<UserDTO> findUsersByTournamentId(int tournamentId) {
         List<UserDTO> users = new ArrayList<>();
@@ -85,7 +83,7 @@ public class JdbcTournamentDao implements TournamentDao{
         }
         return users;
     }
-// should this go in MatchDao??
+
     @Override
     public List<Match> findMatchesByTournamentId(int tournamentId) {
         List<Match> matches = new ArrayList<>();

@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-//@PreAuthorize("isAuthenticated()")
 public class TournamentController {
 
     @Autowired
@@ -34,13 +33,6 @@ public class TournamentController {
 
         return tournament;
     }
-
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    @RequestMapping(path = "/tournaments/{tournamentName}", method = RequestMethod.GET)
-//    public Tournament findByTournamentName (@PathVariable String tournamentName) {
-//        Tournament tournament = tournamentDao.findByTournamentName(tournamentName);
-//        return tournament;
-//    }
 
     @RequestMapping(path = "/tournaments/{tournamentId}/players", method = RequestMethod.GET)
     public List<UserDTO> findUsersByTournamentId (@PathVariable int tournamentId) {
