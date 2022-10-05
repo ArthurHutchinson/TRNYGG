@@ -35,8 +35,9 @@ export default {
       font-family: 'Chakra Petch', sans-serif;
       position: relative;
       right: 20px;
-      top: 5px
+      top: 7px;
     }
+
     #user-icon-nav {
       margin-right: 5px;
     }
@@ -49,10 +50,6 @@ export default {
         border-bottom: 3px solid #825AB7; 
 
         background-color: #232328;
-
-    /* position: fixed;
-    top: 0;
-    width: 100%; */
     }
 
     #t-nav-logo img {
