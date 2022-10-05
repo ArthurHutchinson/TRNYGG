@@ -1,6 +1,6 @@
 <template>
   <div>
-      <p>You need to be authed to see this page.</p>
+      
       <pending-invites />
   </div>
 </template>

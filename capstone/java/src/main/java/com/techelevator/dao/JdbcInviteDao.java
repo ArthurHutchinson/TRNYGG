@@ -82,6 +82,11 @@ public class JdbcInviteDao implements InviteDao{
 
     @Override
     public int createInvite(Invite invite, String string) {
+        String test = "SELECT * FROM invites WHERE tournament_id = ? AND player_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(test, invite.getTournamentId(), invite.getPlayerId());
+        if(results.next()){
+            return 0;
+        }
         String sql = "INSERT INTO invites (tournament_id, organizer_id, player_id, status, type) VALUES (?,?,?,?,?) RETURNING invite_id";
         int id = jdbcTemplate.queryForObject(sql, Integer.class, invite.getTournamentId(), invite.getOrganizerId(),
                 invite.getPlayerId(), "pending", string);
