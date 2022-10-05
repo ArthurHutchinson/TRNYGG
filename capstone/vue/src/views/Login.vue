@@ -21,7 +21,7 @@
         Thank you for registering, please sign in.
       </div>
 
-      <label for="username" class="sr-only">Username</label>
+      <label for="username" class="">Username</label>
 
       <b-form-input
         type="text"
@@ -33,7 +33,7 @@
         autofocus
       />
 
-      <label for="password" class="sr-only">Password</label>
+      <label for="password" class="">Password</label>
 
       <b-form-input
         type="password"

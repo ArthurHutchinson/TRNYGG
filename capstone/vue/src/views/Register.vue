@@ -10,7 +10,7 @@
         {{ registrationErrorMsg }}
       </div>
 
-      <label for="username" class="sr-only">Username</label>
+      <label for="username" class="">Username</label>
 
       <input
         type="text"
@@ -22,7 +22,7 @@
         autofocus
       />
 
-      <label for="password" class="sr-only">Password</label>
+      <label for="password" class="">Password</label>
 
       <input
         type="password"

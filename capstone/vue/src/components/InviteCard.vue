@@ -5,8 +5,8 @@
       <h5 v-if="!isHost"> Host: {{ tournament2.organizerName }} </h5>
       <h5 v-else> Player: {{ user.username }}  </h5>
       <p>Status : {{invite.status}} </p>
-      <b-button v-if="invite.status == 'pending' && isActive && isFull" v-on:click="acceptInvite()"> Accept </b-button>
-      <b-button v-if="invite.status == 'pending' && isActive && isFull" v-on:click="declineInvite()"> Reject </b-button>
+      <b-button v-bind:to="{ name: 'user' }" v-if="invite.status == 'pending' && isActive && isFull" v-on:click="acceptInvite()"> Accept </b-button>
+      <b-button v-bind:to="{ name: 'user' }"    v-if="invite.status == 'pending' && isActive && isFull" v-on:click="declineInvite()"> Reject </b-button>
       <p v-if="!isFull">Tournament is full</p>
   </div>
 </template>

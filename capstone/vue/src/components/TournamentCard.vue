@@ -34,14 +34,14 @@
                 <b-card-img top id="no-icon-due-to-null-empty" v-if="tournament.imgUrl==null" src="http://localhost:8080/img/trnygg.d399dc61.png"/>
                 <b-card-img top id='tournament-icon' v-if='tournament.imgUrl' v-bind:src="tournament.imgUrl" @error="imageUrlAlt" />
                 
-
+                <!--  {{ username.substring(0,10)+".." }} MAybe use a if to detect if length is greater than 10-->
                 <b-card-title>{{tournament.tournamentName}}</b-card-title>
                 <b-card-sub-title>Game: {{tournament.game}}</b-card-sub-title>
                 <b-card-sub-title>Host: {{tournament.organizerName}}</b-card-sub-title>
                 <b-card-sub-title>Start Date: {{tournament.fromDate}}</b-card-sub-title>
                 <b-card-sub-title>End Date: {{tournament.toDate}}</b-card-sub-title>
 
-                <b-button id="t-page-button" v-bind:to="{name: 'tournament-page', params: {id: tournament.tournamentId}}">Tournament Page</b-button>
+                <b-button id="t-page-button" v-bind:to="{name: 'tournament-page', params: {id: tournament.tournamentId}}">Tournament Details</b-button>
             
             </b-card>
         </b-col>
