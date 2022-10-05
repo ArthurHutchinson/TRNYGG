@@ -87,7 +87,7 @@ export default {
             this.invite.playerId = response.data;
             InviteService.createInvite(this.invite).then((response) => {
               if (response.status === 200) {
-                this.$router.push({ name: "home" });
+                this.loadPlayer(this.id)
               }
             });
           }

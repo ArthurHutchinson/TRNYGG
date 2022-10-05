@@ -28,5 +28,8 @@ export default {
     },
     setWinner(id, username) {
         return axios.post(`match/${id}/winner`, username, {headers: {'content-type':'text/json'}})
+    },
+    updateTournament(id, tournament) {
+        return axios.put(`/tournaments/${id}/update`, tournament)
     }
 }

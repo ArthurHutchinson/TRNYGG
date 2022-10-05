@@ -1,6 +1,5 @@
 <template>
   <div>
-      <p>You need to be authed to see this page.</p>
       <select-avatar/>
       <pending-invites />
   </div>
