@@ -32,7 +32,7 @@
         <invite-form v-bind:tournament="tournament" />
       </b-modal>
       <b-button id="request" v-b-modal="'player-requests'" v-if="this.$store.state.user.username == tournament.organizerName" v-bind:to="{ name: 'user' }">View Requests</b-button>
-      
+      <b-button id="t-edit-page" v-if="$store.state.user.id == tournament.organizerId" v-bind:to="{name: 'tournament-page-edit', params: {id: tournament.tournamentId}}">Edit Tournament</b-button>
     </div>
       </div>
         <img class="tournament-logo" v-if="tournament.imgUrl" v-bind:src="tournament.imgUrl"/>
@@ -221,5 +221,14 @@ export default {
   list-style: none;
   font-size: large;
   font-family: 'Chakra Petch', sans-serif;
+}
+
+#t-edit-page {
+  font-family: 'Chakra Petch', sans-serif;
+  background-color: #FC7900;
+  border: none;
+
+  /* position: relative;
+  top: 5px; */
 }
 </style>
