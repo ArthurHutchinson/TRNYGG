@@ -1,11 +1,14 @@
 <template>
 <div id="invite-container">
-    <div id="invite-card-and-img">
-        <div class="logo-div">
-       <b-img class="invite-tournament-logo" v-if="tournament2.imgUrl" v-bind:src="tournament2.imgUrl"/>
-       <b-img class="invite-tournament-logo" v-else src="http://localhost:8080/img/trnygg.d399dc61.png"/>
+
+    <div id="t-invite-card-and-img">
+
+        <div class="t-logo-div">
+            <b-img class="invite-tournament-logo" v-if="tournament2.imgUrl" v-bind:src="tournament2.imgUrl"/>
+            <b-img class="no-icon-due-to-null-empty-invite" v-else src="http://localhost:8080/img/trnygg.d399dc61.png"/>
         </div>
-        <div id="invite-card">
+
+        <div id="t-invite-card">
             <h3 v-if="isRequest"> A player wants to join: {{ tournament2.tournamentName }} </h3>
             <h3 v-else>Hey! You've been invite to: {{ tournament2.tournamentName }} </h3>
             <h5 v-if="!isHost"> Host: {{ tournament2.organizerName }} </h5>
@@ -15,7 +18,9 @@
             <b-button id="reject" v-if="invite.status == 'pending' && isActive && isFull" v-on:click="declineInvite(),reloadPage()"> Reject </b-button>
             <p v-if="!isFull">Tournament is full</p>
         </div>
+
     </div>
+
 </div>
 </template>
 
@@ -103,52 +108,72 @@ export default {
 
 <style>
 
-#invite-card-and-img {
+#invite-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#t-invite-card-and-img {
     display: flex;
-    border:3px solid #4c4c58;
-    border-radius: 10px;
-    margin: 10px;
-    padding: 10px;
-    height: 30vh;
-    max-width: 66%;
-    margin-left: 16.5%;
-    /* justify-content: space-around; */
-    background-color: #232328;
-}
-#invite-card-and-img:hover {
-    border: 3px solid #825AB7;
-    box-shadow: 0 0 5px 0.30rem #825AB73a;
 
-
-}
-#invite-card {
-    display: block;
-    text-align: center;
-    font-family: 'Chakra Petch', sans-serif;
-    height: .7fr;
     margin: auto;
 
+    height: 20rem;
+    max-width: 68rem;
+
+    padding: 10px;
+
+    background-color: #232328;
+
+    border:3px solid #4c4c58;
+    border-radius: 10px;
+
+    /* justify-content: space-around; */
+}
+
+#t-invite-card-and-img:hover {
+    border: 3px solid #825AB7;
+    box-shadow: 0 0 5px 0.30rem #825AB73a;
+}
+
+#t-invite-card {
+    display: block;
+
+    margin: auto;
+
+    text-align: center;
+    font-family: 'Chakra Petch', sans-serif;
 }
 
 .invite-tournament-logo {
-    align-self: center;
     object-fit: cover;
     object-position: 50% 50%;
-    max-width: 20vw;
-    max-height: 30vh;
+
+    width: 20em;
+    height: 15em;
+}
+
+.no-icon-due-to-null-empty-invite {
+    object-fit: scale-down;
+    object-position: 50% 50%;
+
+    width: 20em;
+    height: 15em;
+}
+
+.t-logo-div {
+    display: flex;
+
+    object-fit: cover;
+    object-position: 50% 50%;
+    align-self: center;
+
+    background-color: #32323A;
+    border: 3px solid #32323A;
     border-radius: 5px;
 
 }
-.logo-div {
-    display: flex;
-    height: 25vh;
-    width: 20.3vw;
-    border: 3px solid #32323A;
-    border-radius: 5px;
-    object-fit: cover;
-    object-position: 50% 50%;
-    align-self: center;
-}
+
 #reject{
     margin: 10px;
     width: 150px;
@@ -156,6 +181,7 @@ export default {
     background-color: #FC7900;
     border: none;
 }
+
 #accept{
     margin: 10px;
     width: 150px;
@@ -163,9 +189,11 @@ export default {
     background-color: #825AB7;
     border: none;
 }
+
 #accept:hover{
     background-color: #614388;
 }
+
 #reject:hover{
     background-color: #c45f00;
 }
