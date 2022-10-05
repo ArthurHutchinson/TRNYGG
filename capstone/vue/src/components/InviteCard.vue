@@ -5,8 +5,8 @@
       <h5 v-if="!isHost"> Host: {{ tournament2.organizerName }} </h5>
       <h5 v-else> Player: {{ user.username }}  </h5>
       <p>Status : {{invite.status}} </p>
-      <b-button v-bind:to="{ name: 'user' }" v-if="invite.status == 'pending' && isActive && isFull" v-on:click="acceptInvite()"> Accept </b-button>
-      <b-button v-bind:to="{ name: 'user' }"    v-if="invite.status == 'pending' && isActive && isFull" v-on:click="declineInvite()"> Reject </b-button>
+      <b-button v-if="invite.status == 'pending' && isActive && isFull" v-on:click="acceptInvite(),reloadPage()"> Accept </b-button>
+      <b-button v-if="invite.status == 'pending' && isActive && isFull" v-on:click="declineInvite(),reloadPage()"> Reject </b-button>
       <p v-if="!isFull">Tournament is full</p>
   </div>
 </template>
@@ -56,7 +56,10 @@ export default {
                 }
             })
             // this.$router.go()
-        }
+        },
+        reloadPage() {
+            window.location.reload();
+        },
     },
     computed: {
     //     getTournament(){
@@ -75,8 +78,8 @@ export default {
             return this.usersInTourny.length < this.tournament2.numOfParticipants
         }
      },
-    created(){
-        TournamentService.getPlayersByTournamentId(this.invite.tournamentId).then(response => {
+    async created(){
+        await TournamentService.getPlayersByTournamentId(this.invite.tournamentId).then(response => {
             this.usersInTourny = response.data
         })
         this.id = this.$route.params.id
