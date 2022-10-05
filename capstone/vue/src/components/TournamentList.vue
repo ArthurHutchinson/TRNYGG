@@ -103,41 +103,6 @@ export default {
     text-align: center;
 }
 
-.pagination-n {
-    --bs-link-color: #FFFFFF !important;
-    --bs-link-hover-color: #825AB7 !important;
-
-    --bs-pagination-color: var(--bs-link-color) !important;
-    --bs-pagination-bg: #232328 !important;
-    --bs-pagination-border-color: none !important;
-    
-    --bs-pagination-hover-color: noner !important;
-    --bs-pagination-hover-bg: #402d5a  !important;
-    --bs-pagination-hover-border-color: #453061  !important;
-
-    --bs-pagination-focus-color: var(--bs-link-hover-color) !important;
-    --bs-pagination-focus-bg: #825AB7  !important;
-    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem #825ab73a !important;
-
-    --bs-pagination-active-color: #FFFFFF  !important;
-    --bs-pagination-active-bg: #825AB7  !important;
-    --bs-pagination-active-border-color: #614388  !important;
-
-    --bs-pagination-disabled-color: #3a3a42  !important;
-    --bs-pagination-disabled-bg: #232328  !important;
-    --bs-pagination-disabled-border-color: none !important;
-
-    /*
-#FFFFFF - white
-#32323A - background
-#232328 - dark background
-#825AB7 - purple
-#614388 - hover purple
-#FC7900 - orange
-#C45F00 - hover orange
-*/
-}
-
 .pagination {
     --bs-link-color: #FFFFFF !important;
     --bs-link-hover-color: #FC7900 !important;

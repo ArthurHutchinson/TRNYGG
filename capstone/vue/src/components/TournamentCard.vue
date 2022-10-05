@@ -85,8 +85,10 @@ export default {
         object-fit: scale-down;
         object-position: 50% 50%;
 
-        border:3px solid #825AB7;
+        border:3px solid #32323A;
         border-radius: 5px;
+
+        background-color: #32323A;
 
     }
 
@@ -100,15 +102,27 @@ export default {
         object-fit:cover;
         object-position: 50% 50%;
 
-        border:3px solid #825AB7;
+        border:3px solid #32323A;
         border-radius: 5px;
+
+        background-color: #32323A;
     }
 
     #t-card {
         color: black;
         background-color: #232328;
         color:white;
-        border:3px solid #825AB7;
+        border:3px solid #4c4c58;
+        /* border:3px solid #32323A; */
+        
+        
+    }
+
+    #t-card:hover {
+        border: 3px solid #825AB7;
+        box-shadow: 0 0 5px 0.30rem #825AB73a;
+        /* --bs-pagination-focus-box-shadow: 0 0 0 0.25rem #FC79003a !important; */
+        
     }
 
     #t-page-button {
