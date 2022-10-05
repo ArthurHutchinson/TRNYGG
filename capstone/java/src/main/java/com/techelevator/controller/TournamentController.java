@@ -72,4 +72,9 @@ public class TournamentController {
         return userDao.allUsersInTournament(id);
 
     }
+
+    @GetMapping(path = "/users/tournaments/{id}")
+    public List<Integer> getAllTournamentsByUserId(@PathVariable int id){
+        return tournamentDao.getAllTournamentsByUserId(id);
+    }
 }

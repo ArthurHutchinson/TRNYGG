@@ -24,4 +24,6 @@ public interface TournamentDao {
     int createTournament(Tournament tournament);
 
     boolean updateTournament(Tournament tournament, int tournamentId);
+
+    List<Integer> getAllTournamentsByUserId(int id);
 }
