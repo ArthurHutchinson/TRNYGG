@@ -37,6 +37,17 @@ public class JdbcTournamentDao implements TournamentDao{
     }
 
     @Override
+    public List<Integer> getAllTournamentsByUserId(int id) {
+        List<Integer> ids = new ArrayList<>();
+        String sql = "Select tournament_id FROM tournament_user WHERE user_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+        while (results.next()){
+            ids.add(results.getInt("tournament_id"));
+        }
+        return ids;
+    }
+
+    @Override
     public Tournament findTournamentById(int tournamentId) {
         String sql = "SELECT * FROM tournaments WHERE tournament_id = ?";
 

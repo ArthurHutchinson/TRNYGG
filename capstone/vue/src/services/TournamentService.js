@@ -31,5 +31,8 @@ export default {
     },
     updateTournament(id, tournament) {
         return axios.put(`/tournaments/${id}/update`, tournament)
+    },
+    getTournamentsByUserId(id){
+        return axios.get(`/users/tournaments/${id}`)
     }
 }

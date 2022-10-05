@@ -83,7 +83,9 @@ export default {
             this.usersInTourny = response.data
         })
         this.id = this.$route.params.id
-        this.user = UserService.getUserDTOById(this.invite.playerId)
+        UserService.getUserDTOById(this.invite.playerId).then(response => {
+            this.user = response.data
+        })
         this.tournament = this.$store.state.tournaments.filter((tournament) => {
                 return tournament.tournamentId == this.invite.tournamentId
     })
