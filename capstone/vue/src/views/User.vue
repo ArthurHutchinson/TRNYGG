@@ -1,6 +1,5 @@
 <template>
   <div>
-      <select-avatar/>
       <pending-invites />
       <!-- <h3>Tournaments Participating</h3>
       <tournament-card
@@ -21,7 +20,6 @@
 
 <script>
 import PendingInvites from '../components/PendingInvites.vue'
-import SelectAvatar from '../components/SelectAvatar.vue'
 // import TournamentService from '../services/TournamentService'
 // import TournamentCard from '../components/TournamentCard.vue'
 export default {
@@ -33,7 +31,6 @@ export default {
   },
   components: {
     PendingInvites,
-    SelectAvatar,
 
 
   },
