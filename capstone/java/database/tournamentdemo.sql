@@ -70,13 +70,13 @@ CREATE TABLE invites(
 
 INSERT INTO users (username, password_hash, role)
 VALUES ('TylerK', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
-('SisterGnu', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
-('AmusedPorpoise', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
-('FlashyStripes', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
+('S1sterGnu75', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
+('AmusedKazoo', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
+('xFlashyStripesx', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
 ('MysteriousToad', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
 ('Dismage', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
 ('Cariboohoo', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
-('BoxEnigma', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
+('BoxEnigm4', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
 ('Essaint', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
 ('BubbleTucan', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
 ('JollyOwl7', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
@@ -97,7 +97,7 @@ VALUES ('TylerK', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K'
 ('KungFuBarbie', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
 ('DietTurtle', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
 ('CappyBlappy', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER'),
-('360NoScope', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER');
+('ArthurH', '$2a$10$o0lCPznuaJf3PmAO9IPUtu1BWaWmCMWxIjU8kYNwP5VwLX6HM7P8K', 'ROLE_USER');
 
 
 INSERT INTO tournaments (organizer_id, name, num_of_participants, type, from_date, to_date, game, img_url)
