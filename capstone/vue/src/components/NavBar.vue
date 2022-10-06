@@ -14,8 +14,8 @@
         <b-button id="alogin" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</b-button>
         <b-button id="aregister" v-bind:to="{ name: 'register' }" v-if="$store.state.token == ''"> Register</b-button>
         <p id="nav-username" v-if="$store.state.token != ''"> <font-awesome-icon id="user-icon-nav" icon="fa-user" />{{$store.state.user.username}}</p>
-        <b-button id="auser" v-bind:to="{ name: 'user' }" v-if="$store.state.token != ''">Profile</b-button>
-        <b-button id="alogout" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</b-button>
+        <b-button id="auser" v-bind:to="{ name: 'user' }" v-if="$store.state.token != ''" v-on:click="reloadPage">Profile</b-button>
+        <b-button id="alogout" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''" >Logout</b-button>
       </div>
     </b-navbar-nav>
 
@@ -25,7 +25,11 @@
 
 <script>
 export default {
-
+  methods: {
+    reloadPage() {
+            window.location.reload();
+        },
+  }
 }
 </script>
 
