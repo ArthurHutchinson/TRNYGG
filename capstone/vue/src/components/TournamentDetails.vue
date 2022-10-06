@@ -30,7 +30,7 @@
         
     <div id="button">
       <b-button id="request" v-b-modal="'invite-player'" v-if="this.$store.state.user.username == tournament.organizerName && isFull">Invite Player</b-button>
-      <b-button id ="request" v-else-if="isFull" v-on:click="requestInvite()"> Request to Join </b-button>
+      <b-button id ="request" v-else-if="isFull && firstRequest" v-on:click="requestInvite()"> Request to Join </b-button>
       <b-modal id="invite-player" hide-footer>
         <template #modal-title>
           Invite Player
@@ -66,7 +66,8 @@ export default {
         organizerId: "",
         playerId: "",
       },
-      players: []
+      players: [],
+      firstRequest: true,
     };
   },
   computed: {
@@ -85,6 +86,7 @@ export default {
       });
     },
     requestInvite() {
+      this.firstRequest = !this.firstRequest
       this.invite.tournamentId = this.tournament.tournamentId;
       this.invite.organizerId = this.tournament.organizerId;
       UserService.getUserId(this.$store.state.user.username).then(
@@ -94,6 +96,8 @@ export default {
             InviteService.createInvite(this.invite).then((response) => {
               if (response.status === 200) {
                 this.loadPlayer(this.id)
+                this.firstRequest = !this.firstRequest
+                window.location.reload();
               }
             });
           }
