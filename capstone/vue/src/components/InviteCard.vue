@@ -9,8 +9,8 @@
         </div>
 
         <div id="t-invite-card">
-            <h3 v-if="isRequest"> A player wants to join: {{ tournament2.tournamentName }} </h3>
-            <h3 v-else>Hey! You've been invite to: {{ tournament2.tournamentName }} </h3>
+            <h3 v-if="isRequest"> A Player Wants To Join: {{ tournament2.tournamentName }} </h3>
+            <h3 v-else>Hey! You've Been Invited To: {{ tournament2.tournamentName }} </h3>
             <h5 v-if="!isHost"> Host: {{ tournament2.organizerName }} </h5>
             <h5 v-else> Player: {{ user.username }}  </h5>
             <p>Status : {{invite.status}} </p>
@@ -117,16 +117,11 @@ export default {
 
 #t-invite-card-and-img {
     display: flex;
-
     margin: auto;
-
     height: 20rem;
     max-width: 68rem;
-
     padding: 10px;
-
     background-color: #232328;
-
     border:3px solid #4c4c58;
     border-radius: 10px;
 
