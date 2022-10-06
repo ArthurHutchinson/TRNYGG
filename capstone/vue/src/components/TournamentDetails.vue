@@ -41,7 +41,7 @@
       <b-button id="request" v-if="$store.state.user.id == tournament.organizerId" v-bind:to="{name: 'tournament-page-edit', params: {id: tournament.tournamentId}}">Edit Tournament</b-button>
     </div>
       </div>
-        <img class="tournament-logo" v-if="tournament.imgUrl" v-bind:src="tournament.imgUrl"/>
+        <img id="t-td-logo" class="tournament-logo" v-if="tournament.imgUrl" v-bind:src="tournament.imgUrl"/>
       </div>
     
   </div>
@@ -241,5 +241,10 @@ export default {
 #invite-player {
   --bs-modal-bg: #232328;
   --bs-modal-color: white;
+}
+
+#t-td-logo {
+  border: 3px solid #825AB7;
+  border-radius: 20px;
 }
 </style>
